@@ -1,0 +1,60 @@
+.swiper-button-next, .swiper-button-prev {
+	top: 25% !important;
+	}
+@media (max-width: 767px) {
+	body {
+		    background: linear-gradient(-8deg, #252e48, #3e496c);
+	}
+	.info-block {
+		background: transparent;
+		    border-bottom: none;
+		color:  white;
+	}
+	.newmain {
+		background: transparent;
+	}
+	#sidebar {
+	    background: none;
+	    position: relative;
+	    z-index: 9;
+	}
+	.navbar-light .navbar-brand {
+		color: rgba(255, 255, 255, 0.9);
+	}
+	.navbar-light .navbar-toggler {
+		border-color: rgba(255, 255, 255, 0.4);
+	}
+	i.fa-bars {
+		color: rgba(255, 255, 255, 0.4);
+	}
+	.table {
+		color: white;
+	}
+.navbar-collapse {
+	    position: absolute;
+    height: auto;
+    top: 70px;
+    background: linear-gradient(-8deg, #10172b, #353d58);
+    width: 100%;
+    left: 0;
+    padding: 10px 20px;
+    color: white;
+}
+.wjinside {
+	padding: 15px;
+}
+#chart {
+	margin-top: -25px;
+	    width: 97%;
+}
+.mainblock {
+	padding-top: 60px !important;
+}
+.newmaintop {
+	padding-top: 60px;
+}
+.today {
+	padding: 10px 15px;
+	color: white;
+}
+}

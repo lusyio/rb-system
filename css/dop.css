@@ -1,0 +1,11 @@
+@media (max-width: 767px) {
+	#sidebar {
+		background: #293054;
+	}
+	.navbar-light .navbar-brand {
+		color: rgba(255, 255, 255, 0.9);
+	}
+	.navbar-light .navbar-toggler {
+		border-color: rgba(255, 255, 255, 0.4);
+	}
+}
