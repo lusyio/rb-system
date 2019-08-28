@@ -1,6 +1,7 @@
 ### custom ###
 
 *.htaccess
+*bdcon.php
 .well-known
 
 
