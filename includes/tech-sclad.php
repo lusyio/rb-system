@@ -81,6 +81,11 @@ $tech = DB('*','tech_tech','');
 <div class="card mt-3">
 	<div class="card-body">
 <p><input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Введите название запчасти..."></p>
+        <div>
+            <?php foreach ($tech as $techUnit): ?>
+            <a href="#tech<?= $techUnit['id'] ?>" class="mr-3"><?= $techUnit['name'] ?></a>
+            <?php endforeach; ?>
+        </div>
 					<table class="table table-hover" id="logtable">
 						  <thead>
 						    <tr>
@@ -141,7 +146,7 @@ $tech = DB('*','tech_tech','');
 						
 						foreach ($tech as $n) : ?>
 							
-							<tr class="table-active"><td><?=$n['name']?>
+							<tr class="table-active" id="tech<?= $n['id'] ?>"><td><?=$n['name']?>
 							<span style="display: none">
 							<?php $tech1 = DB('*','tech_oil','tech='.$n['id']); foreach ($tech1 as $n1) { echo $n1['name'].' '; } ?>
 							</td><td></td><td></td><td></td></tr>
