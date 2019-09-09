@@ -48,7 +48,7 @@ if (isset($_POST['nameTech'])) { //проверяем, есть ли перем�
 $zaplist = DB('*','tech_oil','');	
 $tech = DB('*','tech_tech','');
 ?>
-<a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-primary btn-sm mb-3"><i class="fas fa-plus mr-2"></i>Добавить новую запчасть</a>
+<a data-toggle="collapse" href="#collapseExample" id="addNewZap" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-primary btn-sm mb-3"><i class="fas fa-plus mr-2"></i>Добавить новую запчасть</a>
 
 <div class="collapse" id="collapseExample">
 	<div class="card mb-3">
@@ -81,11 +81,12 @@ $tech = DB('*','tech_tech','');
 <div class="card mt-3">
 	<div class="card-body">
 <p><input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Введите название запчасти..."></p>
-        <div>
+        <div class="mb-3">
             <?php foreach ($tech as $techUnit): ?>
-            <a href="#tech<?= $techUnit['id'] ?>" class="mr-3"><?= $techUnit['name'] ?></a>
+            <a href="#tech<?= $techUnit['id'] ?>" class="mr-1 btn"><?= $techUnit['name'] ?></a>
             <?php endforeach; ?>
         </div>
+        <div class="table-responsive">
 					<table class="table table-hover" id="logtable">
 						  <thead>
 						    <tr>
@@ -194,14 +195,15 @@ $tech = DB('*','tech_tech','');
 							
 						<?php endforeach;?>
  					</tbody>
-				</table>	
+				</table>
+        </div>
 	</div>
 </div>
 
 
 
 <div class="info-block">
-	<div class="inside">
+	<div class="inside table-responsive">
 		<table class="table table-hover">
 		  	<thead>
 			    <tr>
