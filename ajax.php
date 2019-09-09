@@ -37,5 +37,14 @@ if(isset($_POST['zap']) && !empty($_POST['zap'])) {
 	$count = $_POST['count'];
 	$filename = 'includes/tech/tech-ajax-zap.php';
 	require_once(realpath('includes/tech/tech-ajax-zap.php'));
-} 
+}
+if(isset($_POST['techreport']) && !empty($_POST['techreport'])) {
+	// подключаем pdo
+	require_once(realpath('bdcon.php'));
+    $startDate = $_POST['startDate'];
+    $endDate = $_POST['endDate'];
+    $idtech = $_POST['techreport'];
+	$filename = 'includes/tech/tech-ajax-zap.php';
+	require_once(realpath('includes/tech-tech-table.php'));
+}
 ?>

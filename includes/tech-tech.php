@@ -29,6 +29,8 @@ if (isset($_POST['delmot'])) { //проверяем, есть ли переме�
 }
 ?>
 <?php if (!empty($idtech)) : ?>
+<?php $startDate = date('Y-m-d', strtotime('midnight -30 days')) ?>
+<?php $endDate = date('Y-m-d') ?>
 <div class="card">
 	<div class="card-body">
 		<div class="row">
@@ -64,45 +66,71 @@ if (isset($_POST['delmot'])) { //проверяем, есть ли переме�
 				    
 				    
 				  </div>
-<div class="card mt-3">
-	<div class="card-body">
-<?php
-$normcount = DBOnce('COUNT(*) as count','tech_norm','tech='.$idtech);
-if (empty($normcount)) {
-	echo '<hr><p class="text-center mt-5 mb-5">Данных по данной технике нет</p>';
-} else { 
-$norm = DB('*','tech_norm','tech='.$idtech.' order by datetime DESC');
-?>
-	<table class="table mb-0">
-			  <thead>
-			    <tr class="table-secondary">
-			      <th scope="col" class="pl-4">Моточасы</th>
-			      <th scope="col">Остаток топлива</th>
-			      <th scope="col">Дата</th>
-			      <th scope="col"><i class="fas fa-trash-alt"></i></th>
-			    </tr>
-			  </thead>
-		  <tbody>
-			  <?php foreach ($norm as $n) { 
-				  $date = date("d.m", strtotime($n['datetime']));
-			  ?>
-			  		
-			  		<tr id="norm-<?=$n['id']?>">
-						<td class="pl-4 font-weight-bold"><?=$n['motchas']?></td>
-						<td class="text-muted"><?=$n['toplivo']?></td>
-						<td class="text-muted"><?=$date?></td>
-						<td width="50px">
-							<form method="post">
-								<input value="<?=$n['id']?>" name="delmot" hidden/>
-								<button type="submit" class="delnorm btn btn-link p-0" ><i class="fas fa-trash-alt text-danger"></i></button>
-							</form>
-						</td>
-					</tr>
-			  
-			  <?php	} ?>
-		  </tbody>
-	</table>
-<?php } ?>
-	</div>
+    <div class="card mt-3">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="date" class="col-form-label"><i class="far fa-calendar-alt mr-2"></i> Дата начала</label>
+                        <input type="date" class="form-control" name="datestart" id="datestart" value="<?= $startDate ?>" max="<?= $now ?>">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="date" class="col-form-label"><i class="fas fa-calendar-alt mr-2"></i> Дата окончания</label>
+                        <input type="date" class="form-control" name="dateend" id="dateend" value="<?= $endDate ?>" max="<?= $now ?>">
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="reportTech" class="col-form-label text-white w-100">Сформировать</label>
+                        <button name="reportTech" id="reportTech" class="btn btn-primary">Сформировать отчет</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="card mt-3" id="reportBox">
+    <?php include 'tech-tech-table.php'; ?>
 </div>
+<script>
+    $('#datestart').on('change', function () {
+        var maxValue = $('#datestart').attr('max');
+        var dateStart = $('#datestart').val();
+        if (dateStart > maxValue) {
+            $('#datestart').val(maxValue);
+            dateStart = maxValue;
+        }
+        if (dateStart > $('#dateend').val()) {
+            $('#dateend').val(dateStart);
+        }
+    });
+    $('#dateend').on('change', function () {
+        var maxValue = $('#dateend').attr('max');
+        var dateEnd = $('#dateend').val();
+        if (dateEnd > maxValue) {
+            $('#dateend').val(maxValue);
+            dateEnd = maxValue;
+        }
+        if (dateEnd < $('#datestart').val()) {
+            $('#datestart').val(dateEnd);
+        }
+    });
+
+    $('#reportTech').on('click', function () {
+        var startDate = $('#datestart').val();
+        var endDate = $('#dateend').val();
+        if (startDate && endDate) {
+            $.post("/ajax.php", {
+                techreport: '<?= $idtech ?>',
+                startDate: startDate,
+                endDate: endDate
+            }, function (data) {
+                if (data) {
+                    $('#reportBox').html(data);
+                }
+            });
+        }
+    });
+</script>
 <?php endif; ?>
