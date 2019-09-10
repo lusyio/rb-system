@@ -352,8 +352,28 @@ if (!empty($tech)) { ?>
 							<div class="card-body pb-0 pt-2">
 								
 								<?php
-									if (!empty($arrayzap)) { ?>
-									<a class="btn btn-link text-center w-100 pb-3" data-toggle="collapse" href="#collapseToZap<?=$n['id']?>" role="button" aria-expanded="false" aria-controls="collapseToZap<?=$n['id']?>">- Список запчастей -</a>
+									if (!empty($arrayzap)) {
+                                        $zapDeficit = false;
+                                        foreach ($arrayzap as $n => $i)
+                                        {
+                                            $c = 0;
+                                            foreach ($i as $pr => $pp)
+                                            {
+                                                if ($c==0) {
+                                                    $countzap =  DBOnce('count','tech_oil','id='.$pp);
+                                                    if (empty($countzap)) { $countzap = 0; }
+                                                }  else {
+                                                    $razn = $countzap - $pp;
+                                                    if ($countzap - $pp < 0) {
+                                                        $zapDeficit = true;
+                                                        break 2;
+                                                    }
+                                                }
+                                                $c++;
+                                            }
+                                        }
+                                        ?>
+									<a class="btn btn-link text-center w-100 pb-3 <?= ($zapDeficit) ? 'text-danger' : '' ?>" data-toggle="collapse" href="#collapseToZap<?=$n['id']?>" role="button" aria-expanded="false" aria-controls="collapseToZap<?=$n['id']?>">- Список запчастей -</a>
 									<div class="collapse" id="collapseToZap<?=$n['id']?>">
 
 									<table class="table small table-hover border-bottom">
