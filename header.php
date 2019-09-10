@@ -13,7 +13,7 @@
  <?php $url = preg_split('~\?~',$_SERVER['REQUEST_URI'])[0];?>
 <script>
 $(function () {
-    var cur_url = <?=$url?>;
+    var cur_url = '<?=$url?>';
     $('.menu li').each(function () {
         var link = $(this).find('a').attr('href');
         if (cur_url == link)
