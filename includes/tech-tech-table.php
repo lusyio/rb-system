@@ -10,7 +10,9 @@
         $daysInPeriod = ((strtotime($endDate) - strtotime($startDate)) / (3600 * 24)) + 1;
         ?>
         <div>
+            <?php if ($normcount > 1): ?>
             <p><b>За период <?= date('d.m', strtotime($startDate)) ?> - <?= date('d.m', strtotime($endDate)) ?>:</b> наработка <?= $narabotka[0]['narabotka'] ?> моточасов, средняя дневная наработка - <?= round($narabotka[0]['narabotka'] / $daysInPeriod) ?> моточасов.</p>
+            <?php endif; ?>
         </div>
         <table class="table mb-0">
             <thead>
