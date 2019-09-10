@@ -265,7 +265,7 @@ $norm = DB('*','tech_norm','tech=41 order by datetime DESC limit 5');
 <?php
 	
 $tech = DB('*','tech_tech','');	
-	
+
 if (!empty($tech)) { ?>
 	  <div class="row mr-0">
 			
@@ -276,11 +276,11 @@ if (!empty($tech)) { ?>
 					$to = DBOnce('motchas','tech_work','status="inwork" and tech='.$n['id']);
 					$typeTO = '';
 					$typeTO = DBOnce('type','tech_work','status="inwork" and tech='.$n['id']);
-					if (!empty($to)) {
+                    if (!empty($to)) {
 					$idto = DBOnce('id','tech_work','status="inwork" and tech='.$n['id']);
 
 					$mch = DBOnce('motchas','tech_norm','tech='.$n['id'].' order by datetime DESC');
-					
+
 					$interval = 500;
 					$otschet = 0;
 					
@@ -298,7 +298,7 @@ if (!empty($tech)) { ?>
 					}
 					
 					$new = (okr(($mch - $otschet) / $interval)*$interval) - ($mch - $otschet);
-					
+
 					if (!empty($to)) {
 						
 						if ($new >= 31 and $new <= 100) {
@@ -312,7 +312,7 @@ if (!empty($tech)) { ?>
 					} else {
 						$new = '';
 					}
-					
+
 					if ($mch > 0) {
 						$mch = '<span style="white-space: nowrap;">' . numb($mch) . ' Мч</span>';
 					} else {
@@ -449,13 +449,50 @@ if (!empty($tech)) { ?>
 			<?php 
 				$i = 1;
 				foreach ($tech as $n) { 
-					$tech = $n['id'];
-						
-					$mch = DBOnce('motchas','tech_norm','tech='.$n['id'].' order by datetime DESC');
-										if ($mch > 0) {
-						$mch = '<span style="white-space: nowrap;">' . numb($mch) . ' Мч</span>';
+
+                    $idto = DBOnce('id','tech_work','status="inwork" and tech='.$n['id']);
+
+                    $mch = DBOnce('motchas','tech_norm','tech='.$n['id'].' order by datetime DESC');
+
+                    $interval = 500;
+                    $otschet = 0;
+
+                    if ($n['id'] == 41 or $n['id'] == 42 ) {
+                        $interval = 500;
+                    }
+                    if ($n['id'] == 41) {
+                        $otschet = 8700;
+                    }
+                    if ($n['id'] == 42) {
+                        $otschet = 5500;
+                    }
+                    if ($n['id'] == 46) {
+                        $otschet = 25267;
+                    }
+
+                    $new = (okr(($mch - $otschet) / $interval + 1) * $interval) - ($mch - $otschet);
+
+                    // Прогноз следующей даты ТО на основании последних $period дней - не меньше 3х!
+                    $period = 30;
+                    $startDate = date('Y-m-d', strtotime('midnight -' . $period . ' days'));
+                    $thirdOfPeriod = round($period / 3);
+                    $startDateThird = date('Y-m-d', strtotime('midnight -' . $thirdOfPeriod . ' days'));
+                    $endDate = date('Y-m-d');
+                    $narabotkaZaPeriod = DBOnce('(MAX(motchas) - MIN(motchas))','tech_norm','tech='.$n['id']. ' AND datetime >= "' . $startDate . '" AND datetime <= "' . $endDate . '" order by datetime DESC');
+                    $narabotkaThird = DBOnce('(MAX(motchas) - MIN(motchas))','tech_norm','tech='.$n['id']. ' AND datetime >= "' . $startDate . '" AND datetime <= "' . $endDate . '" order by datetime DESC');
+                    $mchSredDenPeriod = $narabotkaZaPeriod / $period;
+                    $mchSredDenThird = $narabotkaZaPeriod / $thirdOfPeriod;
+                    $mchSredDen = ($mchSredDenThird * 2 + $mchSredDenPeriod) / 3;
+                    if ($mchSredDen > 0) {
+                        $dneyDoTo = floor($new / $mchSredDen);
+                    } else {
+                        $dneyDoTo = -1;
+                    }
+
+                    if ($mch > 0) {
+						$mchHTML = '<span style="white-space: nowrap;">' . numb($mch) . ' Мч</span>';
 					} else {
-						$mch = '<span class="text-muted">н.з.</span>';
+                        $mchHTML = '<span class="text-muted">н.з.</span>';
 					}
 				?>
 				<div class="col-sm-3 pr-0">
@@ -479,9 +516,19 @@ if (!empty($tech)) { ?>
 									</div>
 									<div class="col-9 text-left">
 										<p class="text-dark mt-2 font-weight-bold mb-1"><?=$n['name']?></p>		
-										<p class="mb-2"><small class="text-secondary"><?=$mch?></small></p>
-									</div>
+										<p class="mb-0"><small class="text-secondary"><?=$mchHTML?></small></p>
+                                        <p class="mb-2 mt-0">
+                                            <?php if ($mch > 0): ?>
+                                            <small class="text-secondary">До ТО: <?= $new ?> Мч <?= ($dneyDoTo > 0 && $dneyDoTo < 60) ? '(~' . $dneyDoTo . ' д.)' : ''?></small></p>
+                                            <?php else: ?>
+                                            <small class="text-secondary">н.з.</small>
+                                            <?php endif; ?>
+                                    </div>
 								</div>
+                            <div class="row text-left">
+                                <div class="col-12">
+                                </div>
+                            </div>
 								
 								
 						
