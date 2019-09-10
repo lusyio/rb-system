@@ -1,7 +1,17 @@
 <?php
+if (isset($_GET['zapid'])) {
+    $zapid = filter_var($_GET['zapid'], FILTER_SANITIZE_NUMBER_INT);
+} else {
+    $zapid = '';
+}
+if (isset($_GET['techid'])) {
+    $techid = filter_var($_GET['techid'], FILTER_SANITIZE_NUMBER_INT);
+} else {
+    $techid = 41;
+}
 // вывод техники
 $tech = DB('*','tech_tech','');
-$zaplist = DB('*','tech_oil','tech="41"');	
+$zaplist = DB('*','tech_oil','tech="'. $techid .'"');
 $tolist = DB('*','tech_to','id != 0 group by tech');
 function arrayzap($array) {
 	$results = [];
@@ -26,7 +36,8 @@ if (isset($_POST['delto'])) { //проверяем, есть ли перемен
 	
 }
 if (isset($_POST['remove'])) {
-		
+	var_dump($_POST);
+	exit;
 	// datetime и путь
 	$url = $_SERVER['REQUEST_URI'];
 	$datetime = date("Y-m-d H:i:s");
@@ -117,14 +128,14 @@ if (isset($_POST['addSclad'])) {
 					
 					<select name="tech" id="tech" class="form-control mb-1">
 						<?php foreach ($tech as $n) { ?>
-						<option value="<?=$n['id']?>"><?=$n['name']?></option>
+						<option value="<?=$n['id']?>"<?= ($n['id'] == $techid) ? ' selected' : '' ?>><?=$n['name']?></option>
 						<?php } ?>
 						
 					</select>
 					<small class="text-secondary">Выберите технику, для которой берем запчасть со склада или добавляем</small>
 				</div>
 			</div>
-			
+
 			<div class="row mb-3">
 				
 				<div class="col-sm-2 font-weight-bold"><i class="fas fa-wrench mr-3"></i>Запчасти</div>
@@ -135,7 +146,7 @@ if (isset($_POST['addSclad'])) {
 							<select name="zaplist" class="form-control mb-1 zaplist">
 								
 								<?php foreach ($zaplist as $n) { ?>
-									<option value="<?=$n['id']?>"><?=$n['name']?></option>
+									<option value="<?=$n['id']?>" <?= ($n['id'] == $zapid) ? ' selected' : '' ?>><?=$n['name']?></option>
 								<?php } ?>
 								
 							</select>
@@ -216,7 +227,7 @@ $(document).ready(function () {
 		value = $('#tech :selected').val();
 		addSelect(value);
 	});
-	
+
 	function addSelect(id) {
 		id = $('#tech').val();
     	$.post("/ajax.php", {technorm: id, info: 'tech-ajax-select'},controlUpdate);
@@ -224,7 +235,7 @@ $(document).ready(function () {
 			$(".zaplist").empty().html(data);
 		}
 	}
-    
+
     $('#makeTO').on('click', function () {
 	    id = $('#tech').val();
 	    to = $('#to').val();
@@ -238,10 +249,10 @@ $(document).ready(function () {
 		zap = zap.slice(0,-1);
 		console.log(zap);
 		if (zap != '') {
-		
+
 		$.post("/ajax.php", {technorm: id, to: to, zaplist:zap, info: 'tech-add-to'},controlUpdate);
     	function controlUpdate(data) {
-			
+
 			swal({
 			title: 'Успешно',
 			text: '',
