@@ -10,7 +10,7 @@
 <script src='/js/sweetalert2.all.js'></script>
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
- <?php $url = $_SERVER['REQUEST_URI'];?>
+ <?php $url = preg_split('~\?~',$_SERVER['REQUEST_URI'])[0];?>
 <script>
 $(function () {
     var cur_url = <?=$url?>;

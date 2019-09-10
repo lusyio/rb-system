@@ -123,7 +123,7 @@ $tech = DB('*','tech_tech','');
 					<td><p class="pt-2 mb-0 font-weight-bold"><?=$n['count']?></p></td>
 					<td>
 						<div class="rashod">
-							<form method="post" action="/tech-add/">
+							<form method="get" action="/tech-add/">
 								<input name="techid" value="0" hidden/>
 								<input name="zapid" value="<?=$n['id']?>" hidden/>
 							<button class="btn small w-100 btn-primary"><i class="fas fa-wrench mr-3"></i>Списать/Добавить</button>

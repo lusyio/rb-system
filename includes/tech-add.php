@@ -7,7 +7,12 @@ if (isset($_GET['zapid'])) {
 if (isset($_GET['techid'])) {
     $techid = filter_var($_GET['techid'], FILTER_SANITIZE_NUMBER_INT);
 } else {
-    $techid = 41;
+    $techid = 0;
+}
+if ($techid == 0) {
+    $techidOption = 59;
+} else {
+    $techidOption = $techid;
 }
 // вывод техники
 $tech = DB('*','tech_tech','');
@@ -128,7 +133,7 @@ if (isset($_POST['addSclad'])) {
 					
 					<select name="tech" id="tech" class="form-control mb-1">
 						<?php foreach ($tech as $n) { ?>
-						<option value="<?=$n['id']?>"<?= ($n['id'] == $techid) ? ' selected' : '' ?>><?=$n['name']?></option>
+						<option value="<?=$n['id']?>"<?= ($n['id'] == $techidOption) ? ' selected' : '' ?>><?=$n['name']?></option>
 						<?php } ?>
 						
 					</select>

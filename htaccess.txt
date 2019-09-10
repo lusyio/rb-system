@@ -3,7 +3,7 @@ RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
 
 
 php_value date.timezone "Europe/Moscow"
-RewriteRule ^([-a-z0-9]+)/$ /index.php?folder=$1 [L, QSA]
+RewriteRule ^([-a-z0-9]+)/$ /index.php?folder=$1 [L,QSA]
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php56” package as the default “PHP” programming language.
