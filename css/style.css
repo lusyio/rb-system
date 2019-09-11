@@ -111,7 +111,16 @@ img {
     text-transform: uppercase;
     margin-bottom: 0px;
 }
-
+#techToBlock {
+    max-width: 100%;
+}
+#techNotToBlock, #techNotToBlock .row {
+    max-width: 100%;
+}
+#techNotToBlock .card {
+    display: block;
+    flex-direction: inherit;
+}
 .btn-fastreport {
     color: #22252a;
     white-space: normal;
@@ -1004,6 +1013,19 @@ collapse {
     .navbar {
         padding: 0px;
     }
+    #techToBlock {
+        margin-right: 0px;
+    }
+    #techToBlock .col-sm-4 {
+        padding-right: 0px;
+    }
+    #techNotToBlock {
+        margin-right: 0px;
+    }
+    #techNotToBlock .col-sm-3 {
+        padding-right: 0px;
+    }
+
 }
 
 @media (max-width: 1025px) and (min-width: 768px) {
@@ -1018,7 +1040,7 @@ collapse {
 
 @media (max-width: 767px) {
     body {
-        background: white;
+        background: #fafafa;
     }
 
     #addNewZap {
