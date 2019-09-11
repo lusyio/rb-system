@@ -508,6 +508,9 @@ if (!empty($tech)) { ?>
             if ($n['id'] == 46) {
                 $otschet = 25267;
             }
+            if (in_array($n['id'], [57, 58, 59])) {
+                continue;
+            }
 
             $new = ((floor(($mch - $otschet) / $interval) + 1) * $interval) - ($mch - $otschet);
 
