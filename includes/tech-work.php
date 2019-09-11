@@ -509,7 +509,7 @@ if (!empty($tech)) { ?>
                 $otschet = 25267;
             }
 
-            $new = (okr(($mch - $otschet) / $interval + 1) * $interval) - ($mch - $otschet);
+            $new = ((floor(($mch - $otschet) / $interval) + 1) * $interval) - ($mch - $otschet);
 
             // Прогноз следующей даты ТО на основании последних $period дней - не меньше 3х!
             $period = 30;
