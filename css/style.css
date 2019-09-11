@@ -111,16 +111,20 @@ img {
     text-transform: uppercase;
     margin-bottom: 0px;
 }
+
 #techToBlock {
     max-width: 100%;
 }
+
 #techNotToBlock, #techNotToBlock .row {
     max-width: 100%;
 }
+
 #techNotToBlock .card {
     display: block;
     flex-direction: inherit;
 }
+
 .btn-fastreport {
     color: #22252a;
     white-space: normal;
@@ -981,13 +985,16 @@ collapse {
 }
 
 
-
 /*= MEDIA
 --------------------------------------------------------*/
 
 @media (min-width: 900px) {
     .downmenu ul {
         font-size: 12px;
+    }
+
+    #techButtonBlock {
+        display: flex;
     }
 
     .newmain {
@@ -1013,15 +1020,19 @@ collapse {
     .navbar {
         padding: 0px;
     }
+
     #techToBlock {
         margin-right: 0px;
     }
+
     #techToBlock .col-sm-4 {
         padding-right: 0px;
     }
+
     #techNotToBlock {
         margin-right: 0px;
     }
+
     #techNotToBlock .col-sm-3 {
         padding-right: 0px;
     }
@@ -1043,14 +1054,25 @@ collapse {
         background: #fafafa;
     }
 
+    #techButtonBlock {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    #techButtonBlock .btn {
+        width: 100%;
+    }
+
     #addNewZap {
         margin-left: 15px;
         margin-top: 15px;
         margin-bottom: 0px !important;
     }
+
     .table-responsive .btn {
         white-space: normal;
     }
+
     .card {
         margin: 10px 15px;
     }

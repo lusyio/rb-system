@@ -155,7 +155,7 @@ $updatework->execute();
 
 ?>
 <div id="tech">
-    <div class="d-flex mt-2">
+    <div class="mt-2" id="techButtonBlock">
         <button class="btn btn-light bg-white border mr-2" data-toggle="collapse" data-target="#addToplivo"
                 aria-expanded="false" aria-controls="addToplivo"><i class="fas fa-tachometer-alt mr-3"></i>Внести
             показания топлива
