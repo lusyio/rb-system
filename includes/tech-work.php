@@ -508,8 +508,11 @@ if (!empty($tech)) { ?>
             if ($n['id'] == 46) {
                 $otschet = 25267;
             }
+            if (in_array($n['id'], [57, 58, 59])) {
+                continue;
+            }
 
-            $new = (okr(($mch - $otschet) / $interval + 1) * $interval) - ($mch - $otschet);
+            $new = ((floor(($mch - $otschet) / $interval) + 1) * $interval) - ($mch - $otschet);
 
             // Прогноз следующей даты ТО на основании последних $period дней - не меньше 3х!
             $period = 30;
