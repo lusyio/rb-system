@@ -366,7 +366,7 @@ if (!empty($tech)) { ?>
                             <?php
                             if (!empty($arrayzap)) {
                                 $zapDeficit = false;
-                                foreach ($arrayzap as $n => $i) {
+                                foreach ($arrayzap as $key => $i) {
                                     $c = 0;
                                     foreach ($i as $pr => $pp) {
                                         if ($c == 0) {
@@ -384,6 +384,7 @@ if (!empty($tech)) { ?>
                                         $c++;
                                     }
                                 }
+                                unset($key);
                                 ?>
                                 <a class="btn btn-link text-center w-100 pb-3 <?= ($zapDeficit) ? 'text-danger' : '' ?>"
                                    data-toggle="collapse" href="#collapseToZap<?= $n['id'] ?>" role="button"
@@ -394,7 +395,7 @@ if (!empty($tech)) { ?>
                                     <table class="table small table-hover border-bottom">
                                         <tbody>
                                         <?php
-                                        foreach ($arrayzap as $n => $i) {
+                                        foreach ($arrayzap as $key => $i) {
                                             //	  echo  "<br>$n:<br>";
                                             $c = 0;
                                             foreach ($i as $pr => $pp) {
@@ -438,9 +439,8 @@ if (!empty($tech)) { ?>
 
 
                             <?php
-                            $allto = DB('*', 'tech_to', 'tech=' . $n['id']);
-
-                            if (!empty($allto)) :
+                            if (empty($typeTO)) :
+                                $allto = DB('*', 'tech_to', 'tech=' . $n['id']);
                                 ?>
                                 <p>Какое это ТО?</p>
                                 <form method="post">
@@ -455,7 +455,6 @@ if (!empty($tech)) { ?>
                                 <hr>
                             <?php endif; ?>
 
-
                         </div>
                         <div class="text-center mb-3"><?= $todone ?></div>
 
@@ -464,10 +463,7 @@ if (!empty($tech)) { ?>
                 </div>
             </div>
             <?php $i++;
-        } ?>
-
-
-        <?php
+        }
     }
     } ?>
 
