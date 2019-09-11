@@ -32,7 +32,7 @@ if (isset($_POST['delto'])) { //проверяем, есть ли перемен
 	}
 </style>
 
-<div class="card">
+<div id="toCard" class="card">
 	<div class="card-body">
 		
 <!-- 		<form method="post"> -->
@@ -106,6 +106,41 @@ if (isset($_POST['delto'])) { //проверяем, есть ли перемен
 <!-- 		</form> 7:15/2:30/5:12 -->
 	</div>
 </div>
+<div id="toEditCard" class="card mt-4 d-none">
+    <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-sm-3 font-weight-bold"><i class="fas fa-truck-monster mr-3"></i>Техника</div>
+            <div class="col-sm-9">
+                <p id="editTechName"></p>
+                <input id="editTechId" type="hidden" value="">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-3 font-weight-bold"><i class="fas fa-clone mr-3"></i>Тип ТО</div>
+            <div class="col-sm-9">
+                <p id="editTOType"></p>
+                <input id="editTOId" type="hidden" value="">
+
+            </div>
+        </div>
+        <hr>
+        <div class="row mb-3">
+            <div class="col-sm-3 font-weight-bold"><i class="fas fa-wrench mr-3"></i>Запчасти</div>
+            <div id ="editZapBox" class="col-sm-9">
+            </div>
+        </div>
+        <div class="text-center w-100"><a id="addEditZap" class="btn btn-link font-weight-bold rounded">+</a></div>
+        <hr>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <button id="updateTO" class="btn btn-success w-100" disabled>Сохранить изменения ТО</button>
+            </div>
+            <div class="col-12 col-md-6">
+                <button id="clearTO" class="btn btn-danger w-100">Сбросить изменения ТО</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <h5 class="mt-4 mb-3" style="font-weight: 800">Добавленные ТО</h5>
 <?php foreach ($tolist as $n) : 
@@ -133,7 +168,8 @@ if (isset($_POST['delto'])) { //проверяем, есть ли перемен
 						    ТО <?=$p['type']?>
 						  </button>
 						  <div class="collapse" id="collapseTechTo<?=$p['id']?>">
-						  <div class="card card-body mb-3">
+						  <div class="card card-body mb-3 to-box">
+                              <div class="to-zap-box">
 						    <?php
 							    $arrayzap = arrayzap($p['zap']);
 									if (!empty($arrayzap)) {
@@ -161,12 +197,24 @@ if (isset($_POST['delto'])) { //проверяем, есть ли перемен
 								  		} 
 								  }
 								  ?>
+                              </div>
+                              <div class="to-edit-box">
+
+                              </div>
 								  <hr>
+                              <div class="row">
+                                  <div class="col-sm-auto col-12">
 								  <form method="post">
 									  <input name="delto" value="<?=$p['id']?>" hidden/>
-									  <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt mr-3"></i>Удалить ТО</button>
+									  <button type="submit" class="btn btn-danger w-100"><i class="fas fa-trash-alt mr-3"></i>Удалить ТО</button>
 								  </form>
-						  </div>
+                                  </div>
+                                  <div class="col-sm-auto col-12">
+                                  <button class="btn btn-warning w-100 go-edit-to" data-to-id="<?= $p['id'] ?>" data-tech-id="<?= $idtech ?>" data-tech-name="<?= $nameTech ?>" data-to-type="ТО <?=$p['type']?>"><i class="fas fa-pen-alt mr-3 go-edit-to"></i>Редактировать ТО</button>
+                                  </div>
+                              </div>
+
+                          </div>
 						</div>
 						
 					<?php endforeach; ?>
@@ -195,6 +243,13 @@ $(document).ready(function () {
     	$.post("/ajax.php", {technorm: id, info: 'tech-ajax-select2'},controlUpdate);
     	function controlUpdate(data) {
 			$(".zapBlock").append(data);
+		}
+    });
+	$('#addEditZap').on('click', function () {
+        id = $('#editTechId').val();
+    	$.post("/ajax.php", {technorm: id, info: 'tech-ajax-select-edit'},controlUpdate);
+    	function controlUpdate(data) {
+			$("#editZapBox").append(data);
 		}
     });
     
@@ -227,6 +282,73 @@ $(document).ready(function () {
 			})
 		}
 		}
+    });
+
+    $('.go-edit-to').on('click', function (e) {
+        e.preventDefault();
+        $('#clearTO').trigger('click');
+        var toId = $(this).data('to-id');
+        var techId = $(this).data('tech-id');
+        var techName = $(this).data('tech-name');
+        var toType = $(this).data('to-type');
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#toEditCard").offset().top
+        }, 500);
+        $.post("/ajax.php", {technorm: techId, info: 'tech-ajax-select-edit', toId: toId}, function (data) {
+            $('#editTechId').val(techId);
+            $('#editTOId').val(toId);
+            $('#editTechName').text(techName);
+            $('#editTOType').text(toType);
+            $('#toEditCard').removeClass('d-none');
+            $('#toCard').addClass('d-none');
+            $('#editZapBox').append(data);
+            $('#updateTO').prop("disabled", false);
+        });
+    });
+    
+    $('#clearTO').on('click', function () {
+        $('#editZapBox').html('');
+        $('#editTechId').val('');
+        $('#editTOId').val('');
+        $('#editTechName').text('');
+        $('#editTOType').text('');
+        $('#toEditCard').addClass('d-none');
+        $('#toCard').removeClass('d-none');
+        $('#updateTO').prop("disabled", true);
+    });
+
+    $('#toEditCard, #toCard').on('click', '.remove-row', function () {
+        $(this).closest('.zap-row').remove();
+    });
+
+    $('#updateTO').on('click', function () {
+        var techId = $('#editTechId').val();
+        var toId = $('#editTOId').val();
+        console.log('start');
+        var zap = '';
+        $('.zapBlockInEdit').each(function(){
+            var zapChast = $('.zaplist', this).val();
+            var zapCount = $('.countzap', this).val();
+            zap += zapChast + ':' + zapCount + '/';
+        });
+        zap = zap.slice(0,-1);
+        console.log(zap);
+        if (zap !== '') {
+            $.post("/ajax.php", {technorm: techId, toId: toId, zaplist:zap, info: 'tech-update-to'},controlUpdate);
+            function controlUpdate(data) {
+
+                swal({
+                    title: 'Успешно',
+                    text: '',
+                    type: 'success',
+                    allowOutsideClick: false,
+                }).then(function (result) {
+                    if (result.value) {
+                        window.location = '/tech-to/';
+                    }
+                })
+            }
+        }
     });
 });
 </script>
