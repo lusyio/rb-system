@@ -281,6 +281,38 @@ if (!empty($tech)) { ?>
 
     <?php
     $i = 1;
+    $zapNaVseTO = [];
+    foreach ($tech as $techUnit) {
+        $to = DBOnce('motchas', 'tech_work', 'status="inwork" and tech=' . $techUnit['id']);
+        $typeTO = '';
+        $typeTO = DBOnce('type', 'tech_work', 'status="inwork" and tech=' . $techUnit['id']);
+        if (!empty($to)) {
+            $arrayzap = '';
+            $zap = DBOnce('zap', 'tech_to', 'tech=' . $techUnit['id'] . ' and type="' . $typeTO . '"');
+            if (!empty($zap)) {
+                $arrayzap = arrayzap($zap);
+                foreach ($arrayzap as $zapRow) {
+                    if (key_exists($zapRow[0], $zapNaVseTO)) {
+                        $zapNaVseTO[$zapRow[0]] += $zapRow[1];
+                    } else {
+                        $zapNaVseTO[$zapRow[0]] = $zapRow[1];
+                    }
+                }
+            }
+
+        }
+    }
+    unset($zapRow);
+    $nehvatkaNaVseTO = [];
+    $zapIds = implode(', ', array_keys($zapNaVseTO));
+    $usedZaps = DB('id, count', 'tech_oil', 'id IN (' . $zapIds . ')');
+    foreach ($usedZaps AS $zapRow) {
+        if ($zapRow['count'] < $zapNaVseTO[$zapRow['id']]) {
+            $nehvatkaNaVseTO[] = $zapRow['id'];
+        }
+    }
+
+
     foreach ($tech as $n) {
         $tech = $n['id'];
         $to = DBOnce('motchas', 'tech_work', 'status="inwork" and tech=' . $n['id']);
@@ -386,7 +418,7 @@ if (!empty($tech)) { ?>
                                 }
                                 unset($key);
                                 ?>
-                                <a class="btn btn-link text-center w-100 pb-3 <?= ($zapDeficit) ? 'text-danger' : '' ?>"
+                                <a class="btn btn-link text-center w-100 pb-3 <?= ($zapDeficit) ? 'text-danger' : ((in_array($n['id'], $nehvatkaNaVseTO)) ? 'text-warning' : '') ?>"
                                    data-toggle="collapse" href="#collapseToZap<?= $n['id'] ?>" role="button"
                                    aria-expanded="false" aria-controls="collapseToZap<?= $n['id'] ?>">- Список запчастей
                                     -</a>
@@ -397,34 +429,27 @@ if (!empty($tech)) { ?>
                                         <?php
                                         foreach ($arrayzap as $key => $i) {
                                             //	  echo  "<br>$n:<br>";
-                                            $c = 0;
-                                            foreach ($i as $pr => $pp) {
-                                                if ($c == 0) {
-                                                    $namezap = DBOnce('name', 'tech_oil', 'id=' . $pp);
-                                                    echo '<tr><td>' . $namezap . '</td>';
-                                                    $countzap = DBOnce('count', 'tech_oil', 'id=' . $pp);
-                                                    if (empty($countzap)) {
-                                                        $countzap = 0;
-                                                    }
-                                                    $typezap = DBOnce('type', 'tech_oil', 'id=' . $pp);
-                                                    if ($typezap == 'Масло') {
-                                                        $edin = ' л';
-                                                    } else {
-                                                        $edin = ' шт';
-                                                    }
-                                                } else {
-                                                    $razn = $countzap - $pp;
-                                                    if ($razn < 0) {
-                                                        $textcolor = 'danger';
-                                                    } else {
-                                                        $textcolor = 'success';
-                                                    }
-                                                    echo '<td style="white-space: pre">' . $pp . $edin . '. (<span title="Количество на складу" class="text-' . $textcolor . '">' . $countzap . '</span>)</td>';
-                                                }
-
-                                                $c++;
+                                            $namezap = DBOnce('name', 'tech_oil', 'id=' . $i[0]);
+                                            echo '<tr><td>' . $namezap . '</td>';
+                                            $countzap = DBOnce('count', 'tech_oil', 'id=' . $i[0]);
+                                            if (empty($countzap)) {
+                                                $countzap = 0;
                                             }
-
+                                            $typezap = DBOnce('type', 'tech_oil', 'id=' . $i[0]);
+                                            if ($typezap == 'Масло') {
+                                                $edin = ' л';
+                                            } else {
+                                                $edin = ' шт';
+                                            }
+                                            $razn = $countzap - $i[1];
+                                            if ($razn < 0) {
+                                                $textcolor = 'danger';
+                                            } elseif (in_array($i[0], $nehvatkaNaVseTO)) {
+                                                $textcolor = 'warning';
+                                            } else {
+                                                $textcolor = 'success';
+                                            }
+                                            echo '<td style="white-space: pre">' . $i[1] . $edin . '. (<span title="Количество на складу" class="text-' . $textcolor . '">' . $countzap . '</span>)</td>';
                                             echo '</tr>';
                                         } ?>
                                         </tbody>
