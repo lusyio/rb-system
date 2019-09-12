@@ -1,97 +1,115 @@
 <?php
 	$otrgyz = DBOnce2('COUNT(*) as count','weighing','(GRUZ_NAME = "Песок шлаковый 0-5 мм" OR GRUZ_NAME = "Щебень 5-20 мм" OR GRUZ_NAME = "Щебень 0-20 мм." OR GRUZ_NAME = "Щебень 20-40 мм." OR GRUZ_NAME = "Щебень 20-70 мм.") and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-	if ($otrgyz>0) {
-	
-	$sh05sum = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Песок шлаковый 0-5 мм" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-	$sh520sum = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 5-20 мм" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-	$sh020sum = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 0-20 мм." and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-	$sh2040sum = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 20-40 мм." and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-	$sh2070sum = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 20-70 мм." and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-	
-	
-	$cars = $otrgyz;
-	$carss = array(2,3,4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93, 94, 102, 103, 104);
-	$carss = array(2,3,4, 22, 23, 24, 32, 33, 34);
-	$carss2 = array(1, 21, 31, 41, 51, 61, 71);
-	
-	$allshebtoday = DBOnce2('SUM(NETTO)','weighing','(GRUZ_NAME = "Песок шлаковый 0-5 мм" OR GRUZ_NAME = "Щебень 5-20 мм" OR GRUZ_NAME = "Щебень 0-20 мм." OR GRUZ_NAME = "Щебень 20-40 мм." OR GRUZ_NAME = "Щебень 20-70 мм.") and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-	
-	if (in_array($cars, $carss)) { $carname = 'машины'; } else { $carname = 'машин'; }
-	if (in_array($cars, $carss2)) { $carname = 'машину'; }
-	if ($cars == 1) { $carname = 'машина';}
-	
-	echo '<p>Сегодня мы отгрузили '.numb($allshebtoday/1000).'т. щебня ('.$cars.' '.$carname.'):</p>';
-		
-?>
+	if ($otrgyz == 0) {
+        return;
+    }
 
-		<div class="table-responsive">
-<table class="table">
-	<thead>
-		<tr>
-			<th scope="col"></th>
-			<?php if ($sh05sum > 0) { ?> <th scope="col">0-5</th> <?php } ?>
-			<?php if ($sh520sum > 0) { ?> <th scope="col">5-20</th> <?php } ?>
-			<?php if ($sh020sum > 0) { ?> <th scope="col">0-20</th> <?php } ?>
-			<?php if ($sh2040sum > 0) { ?> <th scope="col">20-40</th> <?php } ?>
-			<?php if ($sh2070sum > 0) { ?> <th scope="col">20-70</th> <?php } ?>
-		</tr>
-	</thead>
-	<tbody id="widj-otgryz">
-<?php  $sql = 'SELECT FIRMA_POL FROM weighing WHERE (GRUZ_NAME = "Песок шлаковый 0-5 мм" OR GRUZ_NAME = "Щебень 5-20 мм" OR GRUZ_NAME = "Щебень 0-20 мм." OR GRUZ_NAME = "Щебень 20-40 мм." OR GRUZ_NAME = "Щебень 20-70 мм.") and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow.' GROUP BY FIRMA_POL';
+$sql = 'SELECT GRUZ_NAME, FIRMA_POL, SUM(NETTO) AS SUM_NETTO FROM weighing WHERE (GRUZ_NAME = "Песок шлаковый 0-5 мм" OR GRUZ_NAME = "Щебень 5-20 мм" OR GRUZ_NAME = "Щебень 0-20 мм." OR GRUZ_NAME = "Щебень 20-40 мм." OR GRUZ_NAME = "Щебень 20-70 мм.") and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow.' GROUP BY FIRMA_POL, GRUZ_NAME';
 		    $sql = $pdoves->prepare($sql);
 			$sql->execute();
 			$sql = $sql->fetchAll(PDO::FETCH_BOTH);
-			
-			foreach ($sql as $result) {
-				
-				$sh05 = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Песок шлаковый 0-5 мм" and FIRMA_POL="'.$result['FIRMA_POL'].'" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-				$sh520 = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 5-20 мм" and FIRMA_POL="'.$result['FIRMA_POL'].'" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-				$sh020 = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 0-20 мм." and FIRMA_POL="'.$result['FIRMA_POL'].'" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-				$sh2040 = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 20-40 мм." and FIRMA_POL="'.$result['FIRMA_POL'].'" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-				$sh2070 = DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 20-70 мм." and FIRMA_POL="'.$result['FIRMA_POL'].'" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwnow);
-				
-				$polych = $result['FIRMA_POL'];
-				
-				if ($polych == 'ОООСтройТехМеханизация') { $polych = 'СТМ'; }
-				if ($polych == 'Администрация городского округа г. Выкса') { $polych = 'Администрация'; }
-				if ($polych == 'ЗАО ПМК ВЫКСУНСКАЯ') { $polych = 'ПМК'; }
-				if ($polych == 'ООО Асфальтный завод Сарова') { $polych = 'Саров'; }
-				if ($polych == 'ОАО «Рязаньавтодор»') { $polych = 'Рязаньавтодор'; }
-				if ($polych == 'Фьючерс. Красовский') { $polych = 'Красовский (ф)'; }
-				if ($polych == 'сотрудникам РУБЕЖА-В') { $polych = 'Сотрудникам'; }
-				if ($polych == 'ООО «Птицекомплекс ВыксОВО»') { $polych = 'Птицекомплекс'; }
-				if ($polych == 'ОООАРСЕНАЛ') { $polych = 'АРСЕНАЛ'; }
-				if ($polych == 'ООО Грин Строй') { $polych = 'Грин Строй';  }
-				if ($polych == 'ООО Дана') { $polych = 'Дана'; }
-				if ($polych == 'ОООУКРусККом') { $polych = 'УКРусККом'; }
-				if ($polych == 'ООО СканГруз') { $polych = 'СканГруз'; }
-				if ($polych == 'ООО СтимСтрой') { $polych = 'СтимСтрой'; }
-				if ($polych == 'ОООДСУЕрмишинский') { $polych = 'ДСУЕрмиш'; }
-				if ($polych == 'ЗАО «Управление Механизированных работ - 10 »') { $polych = 'УМР-10'; }
-				
-				echo '<tr><td>'.$polych.'</td>'; ?>
-				
-			   <?php if ($sh05sum > 0) { ?> <th scope="col"><?=numb($sh05/1000)?></th> <?php } ?>
-			   <?php if ($sh520sum > 0) { ?> <th scope="col"><?=numb($sh520/1000)?></th> <?php } ?>
-			   <?php if ($sh020sum > 0) { ?> <th scope="col"><?=numb($sh020/1000)?></th> <?php } ?>
-			   <?php if ($sh2040sum > 0) { ?> <th scope="col"><?=numb($sh2040/1000)?></th> <?php } ?>
-			   <?php if ($sh2070sum > 0) { ?> <th scope="col"><?=numb($sh2070/1000)?></th> <?php } ?>
-				
-		<?php	echo '</tr>';
-		    }
-				    
-			
-					    
-			echo '<th scope="col"></th>';
-			?>
-			<?php if ($sh05sum > 0) { ?> <th scope="col"><?=numb($sh05sum/1000)?></th> <?php } ?>
-			<?php if ($sh520sum > 0) { ?> <th scope="col"><?=numb($sh520sum/1000)?></th> <?php } ?>
-			<?php if ($sh020sum > 0) { ?> <th scope="col"><?=numb($sh020sum/1000)?></th> <?php } ?>
-			<?php if ($sh2040sum > 0) { ?> <th scope="col"><?=numb($sh2040sum/1000)?></th> <?php } ?>
-			<?php if ($sh2070sum > 0) { ?> <th scope="col"><?=numb($sh2070sum/1000)?></th> <?php } ?>		    
-				     		  
- 	</tbody>
-</table>
-		</div>
+$polychNames = [];
 
-<?php }?>
+$gruzNames = [
+    'Песок шлаковый 0-5 мм',
+    'Щебень 5-20 мм',
+    'Щебень 0-20 мм.',
+    'Щебень 20-40 мм.',
+    'Щебень 20-70 мм.',
+];
+$polychSum = [];
+$gruzSum = [];
+$resultData = [];
+foreach ($sql as $otgruzka) {
+    $polychIndex = array_search($otgruzka['FIRMA_POL'], $polychNames);
+    if ($polychIndex === false) {
+        $polychNames[] = $otgruzka['FIRMA_POL'];
+        $polychIndex = count($polychNames) - 1;
+        $polychSum[$polychIndex] = 0;
+    }
+    $gruzIndex = array_search($otgruzka['GRUZ_NAME'], $gruzNames);
+    if (!isset($gruzSum[$gruzIndex])) {
+        $gruzSum[$gruzIndex] = 0;
+    }
+    $resultData[$polychIndex][$gruzIndex] = $otgruzka['SUM_NETTO'];
+    $polychSum[$polychIndex] += $otgruzka['SUM_NETTO'];
+    $gruzSum[$gruzIndex] += $otgruzka['SUM_NETTO'];
+
+}
+asort($polychNames);
+foreach ($gruzSum as $gruzIndex => $value) {
+    if ($value == 0) {
+        unset($gruzNames[$gruzIndex]);
+    }
+}
+
+	$cars = $otrgyz;
+	$allshebtoday = array_sum($gruzSum);
+
+	if ($cars % 10 >= 5 || $cars % 10 == 0) {$carname = 'машин';}
+	elseif ($cars % 10 == 1) {$carname = 'машину';}
+	else {$carname = 'машины';}
+
+	echo '<p>Сегодня мы отгрузили '.round($allshebtoday/1000).'т. щебня ('.$cars.' '.$carname.'):</p>';
+
+?>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col"></th>
+            <?php foreach ($gruzNames as $gruzName):
+                $displayName = '';
+            if ($gruzName == 'Песок шлаковый 0-5 мм') {$displayName = '0-5';}
+            if ($gruzName == 'Щебень 5-20 мм') {$displayName = '5-20';}
+            if ($gruzName == 'Щебень 0-20 мм.') {$displayName = '0-20';}
+            if ($gruzName == 'Щебень 20-40 мм.') {$displayName = '20-40';}
+            if ($gruzName == 'Щебень 20-70 мм.') {$displayName = '20-70';}
+            ?>
+             <th scope="col"><?= $displayName ?></th>
+            <?php endforeach; ?>
+        </tr>
+        </thead>
+        <tbody id="widj-otgryz">
+        <?php
+        foreach ($polychNames as $polychIndex => $polychName):
+            $polych = $polychName;
+            if ($polych == 'ОООСтройТехМеханизация') { $polych = 'СТМ'; }
+            if ($polych == 'Администрация городского округа г. Выкса') { $polych = 'Администрация'; }
+            if ($polych == 'ЗАО ПМК ВЫКСУНСКАЯ') { $polych = 'ПМК'; }
+            if ($polych == 'ООО Асфальтный завод Сарова') { $polych = 'Саров'; }
+            if ($polych == 'ОАО «Рязаньавтодор»') { $polych = 'Рязаньавтодор'; }
+            if ($polych == 'Фьючерс. Красовский') { $polych = 'Красовский (ф)'; }
+            if ($polych == 'сотрудникам РУБЕЖА-В') { $polych = 'Сотрудникам'; }
+            if ($polych == 'ООО «Птицекомплекс ВыксОВО»') { $polych = 'Птицекомплекс'; }
+            if ($polych == 'ОООАРСЕНАЛ') { $polych = 'АРСЕНАЛ'; }
+            if ($polych == 'ООО Грин Строй') { $polych = 'Грин Строй';  }
+            if ($polych == 'ООО Дана') { $polych = 'Дана'; }
+            if ($polych == 'ОООУКРусККом') { $polych = 'УКРусККом'; }
+            if ($polych == 'ООО СканГруз') { $polych = 'СканГруз'; }
+            if ($polych == 'ООО СтимСтрой') { $polych = 'СтимСтрой'; }
+            if ($polych == 'ОООДСУЕрмишинский') { $polych = 'ДСУЕрмиш'; }
+            if ($polych == 'ЗАО «Управление Механизированных работ - 10 »') { $polych = 'УМР-10'; }
+            ?>
+            <tr>
+                <td><?= $polych ?></td>
+                <?php
+                foreach ($gruzNames as $gruzIndex => $gruzName):
+                    if (isset($resultData[$polychIndex][$gruzIndex])) {
+                        $netto = round($resultData[$polychIndex][$gruzIndex] / 1000);
+                    } else {
+                        $netto = 0;
+                    }
+                    ?>
+                <th scope="col"><?=$netto?></th>
+            <?php endforeach; ?>
+            </tr>
+        <?php endforeach;?>
+            <th scope="col"></th>
+            <?php foreach ($gruzNames as $gruzIndex => $gruzName):?>
+            <th scope="col"><?= round($gruzSum[$gruzIndex] / 1000) ?></th>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
