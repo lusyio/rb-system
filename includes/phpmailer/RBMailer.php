@@ -13,14 +13,14 @@ class RBMailer extends PHPMailer
     {
         parent::__construct($exceptions);
         $this->isSMTP();
-        $this->Host = 'lusy.io';
+        $this->Host = 'richbee';
         $this->SMTPAuth = true;
-        $this->Username = 'info@lusy.io';
-        $this->Password = '~g8#@*2HVne2';
+        $this->Username = 'post@rubezh-info.ru';
+        $this->Password = 'Metro2033228';
         $this->SMTPSecure = 'ssl';
         $this->Port = 465;
         $this->CharSet = 'UTF-8';
-        $this->setFrom('info@lusy.io', 'Lusy.io');
+        $this->setFrom('post@rubezh-info.ru', 'Рубеж');
         $this->isHTML();
     }
 
