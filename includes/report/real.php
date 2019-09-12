@@ -21,13 +21,13 @@
         $polychIndex = array_search($otgruzka['FIRMA_POL'], $polychNames);
         if ($polychIndex === false) {
             $polychNames[] = $otgruzka['FIRMA_POL'];
-            $polychIndex = array_key_last($polychNames);
+            $polychIndex = count($polychNames) - 1;
             $polychSum[$polychIndex] = 0;
         }
         $gruzIndex = array_search($otgruzka['GRUZ_NAME'], $gruzNames);
         if ($gruzIndex === false) {
             $gruzNames[] = $otgruzka['GRUZ_NAME'];
-            $gruzIndex = array_key_last($gruzNames);
+            $gruzIndex = count($gruzNames) - 1;
             $gruzSum[$gruzIndex] = 0;
         }
         $resultData[$polychIndex][$gruzIndex] = $otgruzka['SUM_NETTO'];
