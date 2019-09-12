@@ -4,14 +4,15 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 include 'bdcon.php';
 
-$emails = [];
+$emails = ['mr-kelevras@yandex.ru'];
 require_once 'includes/phpmailer/RBMailer.php';
 $mail = new \PHPMailer\PHPMailer\RBMailer();
 try {
     foreach ($emails as $email) {
         $mail->addAddress($email);
     }
-    $mail->Subject = "Отчет по топливу и щебню";
+    $date = date('d.m');
+    $mail->Subject = "Отчет " . $date;
     $mail->setMessageContent('gsm-scheben', []);
     $mail->send();
 } catch (Exception $e) {
