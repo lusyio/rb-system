@@ -13,7 +13,7 @@ try {
     }
     $date = date('d.m');
     $mail->Subject = "Отчет " . $date;
-    $mail->setMessageContent('gsm-scheben', []);
+    $mail->setMessageContent('report', []);
     $mail->send();
 } catch (Exception $e) {
     return;
