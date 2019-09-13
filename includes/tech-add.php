@@ -41,8 +41,8 @@ if (isset($_POST['delto'])) { //проверяем, есть ли перемен
 	
 }
 if (isset($_POST['remove'])) {
-	var_dump($_POST);
-	exit;
+//	var_dump($_POST);
+//	exit;
 	// datetime и путь
 	$url = $_SERVER['REQUEST_URI'];
 	$datetime = date("Y-m-d H:i:s");
