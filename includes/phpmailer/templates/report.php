@@ -54,11 +54,21 @@ endforeach;
 
 // виджет план
 $generalPlanPercent = okr(($allNight + $allDay) * 100/($planNight + $planDay));
-
+$generalPlanPercent = 0;
 if ($generalPlanPercent >= 100) {
     $imgPlan = 'success';
+    $textPlan = 'План выполнен<br>на <strong>' . $generalPlanPercent . '</strong>%';
+    $textPlanSmall = 'План - выполнен на ' . $generalPlanPercent . '%';
 } else {
     $imgPlan = 'fail';
+    $textPlan = 'План НЕ выполнен<br>Взяли только <strong>' . $generalPlanPercent . '</strong>%';
+    $textPlanSmall = 'План - НЕ выполнен. Взяли только ' . $generalPlanPercent . '%';
+}
+
+if ($generalPlanPercent == 0) {
+    $imgPlan = 'fail';
+    $textPlan = 'Производство<br>не работало';
+    $textPlanSmall = 'План - НЕ выполнен. Производство не работало';
 }
 
 // виджет щебень/скрап
@@ -87,8 +97,7 @@ $scrapToday = round(DBOnce2('SUM(NETTO)', 'weighing', '(GRUZ_NAME = "СКРАП 
                         <tr>
                             <td height="80px" valign="top"><img width="50px" style="margin-right: 20px;margin-top: 3px"
                                                                 src="https://rubezh-info.ru/images/<?= $imgPlan; ?>.jpg"/></td>
-                            <td valign="top"><p style="line-height: 1.8; margin-top:0px">План выполнен<br>на <strong><?= $generalPlanPercent; ?>%</strong>
-                                </p></td>
+                            <td valign="top"><p style="line-height: 1.8; margin-top:0px"><?= $textPlan; ?></p></td>
                         </tr>
                         <tr>
                             <td height="80px" valign="top"><img width="50px" style="margin-right: 20px;margin-top: 3px"
