@@ -1,5 +1,6 @@
 <?php
-include '../../../bdcon.php';
+//include '../../../bdcon.php';
+global $pdo;
 global $pdoves;
 
 // заготовки
