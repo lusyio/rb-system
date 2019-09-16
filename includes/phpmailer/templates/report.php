@@ -2,6 +2,8 @@
 //include '../../../bdcon.php';
 global $pdo;
 global $pdoves;
+global $now;
+global $yesterday;
 
 // заготовки
 //$now = '2019-08-22';
