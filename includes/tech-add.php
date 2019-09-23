@@ -41,11 +41,10 @@ if (isset($_POST['delto'])) { //проверяем, есть ли перемен
 	
 }
 if (isset($_POST['remove'])) {
-//	var_dump($_POST);
-//	exit;
+    
 	// datetime и путь
 	$url = $_SERVER['REQUEST_URI'];
-	$datetime = date("Y-m-d H:i:s");
+	$datetime = date("Y-m-d H:i:s", strtotime($_POST['datezap']));
 	
 	$tech = $_POST['tech'];
 	$oil = $_POST['zaplist'];
@@ -81,7 +80,7 @@ if (isset($_POST['remove'])) {
 if (isset($_POST['addSclad'])) {
 	// datetime и путь
 	$url = $_SERVER['REQUEST_URI'];
-	$datetime = date("Y-m-d H:i:s");
+	$datetime = date("Y-m-d H:i:s", strtotime($_POST['datezap']));
 	
 	$tech = $_POST['tech'];
 	$oil = $_POST['zaplist'];
@@ -165,7 +164,12 @@ if (isset($_POST['addSclad'])) {
 							<small class="text-secondary">Кол-во (шт. или л.)</small>
 						</div>
 					</div>
-					
+                    <div class="row mb-3">
+                        <div class="col-sm-6">
+                            <input type="date" class="form-control mb-1" name="datezap" value="<?= $now ?>">
+                            <small class="text-secondary">Дата</small>
+                        </div>
+                    </div>
 					<div class="row">
 						<div class="col-sm-6">
 							<button type="submit" name="remove" class="btn btn-primary w-100"><i class="fas fa-minus mr-2"></i>Списать запчасть</button>
@@ -174,7 +178,6 @@ if (isset($_POST['addSclad'])) {
 							<button type="submit" name="addSclad" class="btn btn-success w-100"><i class="fas fa-plus mr-2"></i>Добавить на склад</button>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 			
@@ -197,7 +200,7 @@ if (isset($_POST['addSclad'])) {
 		  	</thead>
 		  	<tbody>
 		<?php
-			$sql2 = "SELECT *  FROM oil ORDER BY id DESC LIMIT 300";
+			$sql2 = "SELECT *  FROM oil ORDER BY datetime DESC LIMIT 300";
 			$tech2 = $pdo->prepare($sql2);
 			$tech2->execute();
 			$techs2 = $tech2->fetchAll(PDO::FETCH_BOTH);
