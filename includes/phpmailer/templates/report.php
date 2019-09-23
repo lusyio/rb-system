@@ -57,7 +57,7 @@ endforeach;
 
 // виджет план
 $generalPlanPercent = okr(($allNight + $allDay) * 100/($planNight + $planDay));
-$generalPlanPercent = 0;
+
 if ($generalPlanPercent >= 100) {
     $imgPlan = 'success';
     $textPlan = 'План выполнен<br>на <strong>' . $generalPlanPercent . '</strong>%';
