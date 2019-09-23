@@ -6,12 +6,12 @@
     <?php } else {
         $norm = DB('*','tech_norm','tech='.$idtech. ' AND datetime >= "' . $startDate . '" AND datetime <= "' . $endDate . '" order by datetime DESC');
         $narabotka = DB('(MAX(motchas) - MIN(motchas)) AS narabotka','tech_norm','tech='.$idtech. ' AND datetime >= "' . $startDate . '" AND datetime <= "' . $endDate . '" order by datetime DESC');
-
+        $toplivo = DBOnce('SUM(gsm.toplivo) as sum_toplivo', 'gsm LEFT JOIN tech_tech ON tech_tech.name = gsm.tech', 'tech_tech.id='.$idtech. ' AND date >= "' . $startDate . '" AND date <= "' . $endDate . '"');
         $daysInPeriod = ((strtotime($endDate) - strtotime($startDate)) / (3600 * 24)) + 1;
         ?>
         <div>
             <?php if ($normcount > 1): ?>
-            <p><b>За период <?= date('d.m', strtotime($startDate)) ?> - <?= date('d.m', strtotime($endDate)) ?>:</b> наработка <?= $narabotka[0]['narabotka'] ?> моточасов, средняя дневная наработка - <?= round($narabotka[0]['narabotka'] / $daysInPeriod) ?> моточасов.</p>
+            <p><b>За период <?= date('d.m', strtotime($startDate)) ?> - <?= date('d.m', strtotime($endDate)) ?>:</b> наработка <?= $narabotka[0]['narabotka'] ?> моточасов, средняя дневная наработка - <?= round($narabotka[0]['narabotka'] / $daysInPeriod) ?> моточасов, израсходовано топлива - <?= $toplivo ?> литров, средний дневной расход топлива - <?= round($toplivo / $daysInPeriod) ?> литров</p>
             <?php endif; ?>
         </div>
         <table class="table mb-0">
