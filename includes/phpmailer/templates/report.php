@@ -34,15 +34,15 @@ if ($revenueAll == 0) {
     $revenueImg = 'revenue-no';
 }
 
-$costEvd = DBOnce('SUM(value)', 'kassa', 'type="Расход" and date ' . $bwnow);
-$costBank = DBOnce('SUM(summa)', 'bank', '(type!="Оплата от покупателя" or type!="Перевод с другого счета") and date ' . $bwnow);
+$rateEvd = DBOnce('SUM(value)', 'kassa', 'type="Расход" and date ' . $bwnow);
+$rateBank = DBOnce('SUM(summa)', 'bank', '(type!="Оплата от покупателя" or type!="Перевод с другого счета") and date ' . $bwnow);
 
-$costAll = numb($costEvd + $costBank);
+$rateAll = numb($rateEvd + $rateBank);
 
-$costImg = 'rate';
+$rateImg = 'rate';
 
-if ($costAll == 0) {
-    $costImg = 'rate-no';
+if ($rateAll == 0) {
+    $rateImg = 'rate-no';
 }
 
 
@@ -131,10 +131,23 @@ if (!empty($reportMech) or !empty($toDone) or !empty($toInWork)) {
 }
 
 ?>
-
 <div style="display: none;font-size: 1px;color: #333333;line-height: 1px;max-height: 0px;opacity: 0;overflow: hidden">
-    План - выполнен на 100%. Отгрузили 123т. щебня и 144т. СКРАПа. Доход +1.231.213 руб. Расход -3.234.123 руб. Провели
-    ТО для CAT 320
+    <?= $textPlanSmall; ?>. Отгрузили <?= numb($shebenToday); ?>т. щебня
+    и <?= numb($scrapToday); ?>т. СКРАПа Доход +<?= $revenueAll; ?> руб. Расход -<?= $rateAll; ?> руб.
+    <?php if (!empty($toDone)) : ?>
+
+        <?php foreach ($toDone as $n) : ?>
+
+            <?php
+            $typeTO = '';
+            if (!empty($n['type'])) {
+                $typeTO = $n['type'];
+            }
+            $techName = DBOnce('name', 'tech_tech', 'id=' . $n['tech']);
+            ?>
+            Провели ТО <?= $typeTO; ?> для <?= $techName; ?>.
+        <?php endforeach; ?>
+    <?php endif; ?>
 </div>
 <table cellpadding="0" cellspacing="0" width="100%" border="0">
     <tbody>
@@ -172,10 +185,10 @@ if (!empty($reportMech) or !empty($toDone) or !empty($toInWork)) {
                         </tr>
                         <tr>
                             <td height="80px" valign="top"><img width="50px" style="margin-right: 20px;margin-top: 3px"
-                                                                src="https://rubezh-info.ru/images/<?= $costImg; ?>.jpg"/>
+                                                                src="https://rubezh-info.ru/images/<?= $rateImg; ?>.jpg"/>
                             </td>
                             <td valign="top"><p style="line-height: 1.8; margin-top:0px">Общие расходы<br><strong>-
-                                        <?= $costAll; ?> руб.</strong></p></td>
+                                        <?= $rateAll; ?> руб.</strong></p></td>
                         </tr>
                         </tbody>
                     </table>
@@ -232,9 +245,10 @@ if (!empty($reportMech) or !empty($toDone) or !empty($toInWork)) {
                     <?php if ($techCount != 0) : ?>
                         <div style="background: whitesmoke; padding: 20px; margin-top: 20px">
 
+                            <h2 style="font-size: 20px;font-weight: 900; color:#000000;margin-top: 0px">Отчет
+                                механиков</h2>
+
                             <?php if (!empty($reportMech)) : ?>
-                                <h2 style="font-size: 20px;font-weight: 900; color:#000000;margin-top: 0px">Отчет
-                                    механиков</h2>
                                 <p style="margin-top: 0px;line-height: 2;font-size: 16px;color: #353b41;text-align:left;margin-bottom: 5px;">
                                     <?= $reportMech; ?>
                                 </p>
