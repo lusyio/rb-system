@@ -40,7 +40,7 @@ if (isset($_POST["toplivo"])) {
 }
 
 	$alltech = DB('*','tech_tech','id!=0');
-	$alloil = DB('*','tech_oil','id!=0');
+	$alloil = DB('*','tech_oil','id!=0 AND is_deleted = 0');
 ?>
 <?php $now = date("Y-m-d"); ?>
 <div class="info-block">

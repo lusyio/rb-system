@@ -16,7 +16,7 @@ if ($techid == 0) {
 }
 // вывод техники
 $tech = DB('*','tech_tech','');
-$zaplist = DB('*','tech_oil','tech="'. $techid .'"');
+$zaplist = DB('*','tech_oil','tech="'. $techid .'" AND is_deleted = 0');
 $tolist = DB('*','tech_to','id != 0 group by tech');
 function arrayzap($array) {
 	$results = [];

@@ -1,7 +1,7 @@
 <?php
 // вывод техники
 $tech = DB('*','tech_tech','');
-$zaplist = DB('*','tech_oil','tech="41"');	
+$zaplist = DB('*','tech_oil','tech="41" AND is_deleted = 0');
 $tolist = DB('*','tech_to','id != 0 group by tech');
 function arrayzap($array) {
 	$results = [];

@@ -1,5 +1,5 @@
-<?php $zaplist = DB('*','tech_oil','tech="'.$tech.'"'); 
-	$oils = DB('*','tech_oil','tech="0"');
+<?php $zaplist = DB('*','tech_oil','tech="'.$tech.'" AND is_deleted = 0');
+	$oils = DB('*','tech_oil','tech="0" AND is_deleted = 0');
 	
 	foreach ($zaplist as $n) { ?>
 		<option value="<?=$n['id']?>"><?=$n['name']?></option>

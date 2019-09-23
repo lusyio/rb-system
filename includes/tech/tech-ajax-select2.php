@@ -1,6 +1,6 @@
 <?php 
-	$zaplist = DB('*','tech_oil','tech='.$tech); 
-	$oils = DB('*','tech_oil','type="Масло"');
+	$zaplist = DB('*','tech_oil','tech='.$tech . ' AND is_deleted = 0');
+	$oils = DB('*','tech_oil','type="Масло" AND is_deleted = 0');
 ?>
 	
 

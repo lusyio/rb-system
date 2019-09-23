@@ -20,13 +20,23 @@ if (isset($_POST["addzap"])) {
 if (isset($_POST['del_id'])) { //проверяем, есть ли переменная
 	
 	$iddel = $_POST['del_id'];
-	$deletesql = $pdo->prepare('DELETE from `tech_oil` WHERE `id` = :id');
-	$deletesql->execute(array('id' => $iddel));
-    if ($deletesql) {
-		successmes($url);
-	} else {
-		errormes($url);
-	}
+	$usedInTO = DB('tech_to.type, tech_tech.name', 'tech_to LEFT JOIN tech_tech ON tech_to.tech = tech_tech.id', 'zap LIKE "' . $iddel .':%" OR zap LIKE "%/' . $iddel .':%" ORDER BY tech_tech.id, tech_tech.name');
+	if (count($usedInTO) > 0) {
+	    $errorText = '';
+	    foreach ($usedInTO as $TO) {
+	        $errorText .= $TO['name'] . ' - ТО ' . $TO['type'] . ', ';
+        }
+	    $errorText = trim($errorText, ', ');
+	    errormes($url, 'Эта запчасть используется в ТО', $errorText);
+    } else {
+        $deletesql = $pdo->prepare('UPDATE `tech_oil` SET is_deleted = 1 WHERE `id` = :id');
+        $deletesql->execute(array('id' => $iddel));
+        if ($deletesql) {
+            successmes($url);
+        } else {
+            errormes($url);
+        }
+    }
 	
 }
 
@@ -45,7 +55,7 @@ if (isset($_POST['nameTech'])) { //проверяем, есть ли перем�
 	
 }
 
-$zaplist = DB('*','tech_oil','');	
+$zaplist = DB('*','tech_oil','is_deleted = 0');
 $tech = DB('*','tech_tech','');
 ?>
 <a data-toggle="collapse" href="#collapseExample" id="addNewZap" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-primary btn-sm mb-3"><i class="fas fa-plus mr-2"></i>Добавить новую запчасть</a>
@@ -99,11 +109,11 @@ $tech = DB('*','tech_tech','');
 						  <tbody>
 							  <tr class="table-active"><td>Запчасти без привязки к технике
 								 <span style="display: none">
-							<?php $tech1 = DB('*','tech_oil','tech="0"'); foreach ($tech1 as $n1) { echo $n1['name'].' '; } ?>
+							<?php $tech1 = DB('*','tech_oil','tech="0" AND is_deleted = 0'); foreach ($tech1 as $n1) { echo $n1['name'].' '; } ?>
 							</span> 
 								 
 							  </td><td></td><td></td><td></td></tr>
-<?php $tech1 = DB('*','tech_oil','tech="0"');
+<?php $tech1 = DB('*','tech_oil','tech="0" AND is_deleted = 0');
 	       	 foreach ($tech1 as $n) { ?>
 		   	 	<tr>
 					<td><p class="pt-2 mb-0"><?=$n['name']?></p>
@@ -149,10 +159,10 @@ $tech = DB('*','tech_tech','');
 							
 							<tr class="table-active" id="tech<?= $n['id'] ?>"><td><?=$n['name']?>
 							<span style="display: none">
-							<?php $tech1 = DB('*','tech_oil','tech='.$n['id']); foreach ($tech1 as $n1) { echo $n1['name'].' '; } ?>
+							<?php $tech1 = DB('*','tech_oil','tech=' . $n['id'] . ' AND is_deleted = 0'); foreach ($tech1 as $n1) { echo $n1['name'].' '; } ?>
 							</td><td></td><td></td><td></td></tr>
 							
-			<?php $tech1 = DB('*','tech_oil','tech='.$n['id']);
+			<?php $tech1 = DB('*','tech_oil','tech=' . $n['id'] . ' AND is_deleted = 0');
 	       	 foreach ($tech1 as $n1) { ?>
 		   	 	<tr>
 					<td><p class="pt-2 mb-0"><?=$n1['name']?></p>
