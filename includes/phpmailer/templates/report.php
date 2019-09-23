@@ -132,8 +132,8 @@ if (!empty($reportMech) or !empty($toDone) or !empty($toInWork)) {
 
 ?>
 <div style="display: none;font-size: 1px;color: #333333;line-height: 1px;max-height: 0px;opacity: 0;overflow: hidden">
-    <?= $textPlanSmall; ?>. Отгрузили <?= numb($shebenToday); ?>т. щебня
-    и <?= numb($scrapToday); ?>т. СКРАПа Доход +<?= $revenueAll; ?> руб. Расход -<?= $rateAll; ?> руб.
+    <?= $textPlanSmall; ?>.<br>Отгрузили <?= $shebenToday; ?>т. щебня
+    и <?= $scrapToday; ?>т. СКРАПа.<br>Доход +<?= $revenueAll; ?> руб.<br>Расход -<?= $rateAll; ?> руб.<br>
     <?php if (!empty($toDone)) : ?>
 
         <?php foreach ($toDone as $n) : ?>
