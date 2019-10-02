@@ -1,13 +1,13 @@
 <?php
-//include '../../../bdcon.php';
+include '../../../bdcon.php';
 global $pdo;
 global $pdoves;
 global $now;
 global $yesterday;
 
 // заготовки
-//$now = '2019-08-27';
-//$yesterday = '2019-08-26';
+$now = '2019-08-27';
+$yesterday = '2019-08-26';
 $bwnow = 'between "' . $yesterday . ' 20:00:00" and "' . $now . ' 19:59:59"';
 
 // информация по сменам
@@ -83,8 +83,10 @@ endforeach;
 
 // виджет план
 $generalPlanPercent = 0;
-if (!empty($planNight) and !empty($planDay)) {
-    $generalPlanPercent = okr(($allNight + $allDay) * 100 / ($planNight + $planDay));
+$summ = $allNight + $allDay;
+
+if (!empty($planNight) or !empty($planDay)) {
+    $generalPlanPercent = okr(($summ) * 100 / ($planNight + $planDay));
 }
 
 if ($generalPlanPercent >= 100) {
@@ -97,11 +99,18 @@ if ($generalPlanPercent >= 100) {
     $textPlanSmall = 'План - НЕ выполнен. Взяли только ' . $generalPlanPercent . '%';
 }
 
-if ($generalPlanPercent == 0) {
+if ($generalPlanPercent == 0 and $summ == 0) {
     $imgPlan = 'fail';
     $textPlan = 'Производство<br>не работало';
     $textPlanSmall = 'План - НЕ выполнен. Производство не работало';
 }
+
+if ($generalPlanPercent == 0 and $summ > 0) {
+    $imgPlan = 'success';
+    $textPlan = 'Производство отработало<br>нормально. План выполнен.';
+    $textPlanSmall = 'Производство отработало нормально';
+}
+
 
 // виджет щебень/скрап
 $shebenToday = round(DBOnce2('SUM(NETTO)', 'weighing', '(GRUZ_NAME = "Песок шлаковый 0-5 мм" OR GRUZ_NAME = "Щебень 5-20 мм" OR GRUZ_NAME = "Щебень 0-20 мм." OR GRUZ_NAME = "Щебень 20-40 мм." OR GRUZ_NAME = "Щебень 20-70 мм.") and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE ' . $bwnow) / 1000);
