@@ -326,11 +326,13 @@
 			if(empty($to)) {
 				echo 'Хочу добавить ТО ';
 				if ($razn == 1 or $razn >= 400) {
-				
-					$sql = $pdo->prepare("INSERT INTO `tech_work` SET `tech` = :tech, `status` = 'inwork', `motchas` = :motchas, `datetime` = :datetime");
-					$sql->execute(array('tech' => $n['id'], 'motchas' => $mch, 'datetime' => $datetime));
-					$to = DBOnce('tech','tech_work','status="inwork" and tech='.$n['id']);
-					echo 'Добавил ТО для техники ' . DBOnce('name','tech_tech','id='.$n['id']) . '<hr>';
+
+				    if ($n['id']  != '55') {
+                        $sql = $pdo->prepare("INSERT INTO `tech_work` SET `tech` = :tech, `status` = 'inwork', `motchas` = :motchas, `datetime` = :datetime");
+                        $sql->execute(array('tech' => $n['id'], 'motchas' => $mch, 'datetime' => $datetime));
+                        $to = DBOnce('tech', 'tech_work', 'status="inwork" and tech=' . $n['id']);
+                        echo 'Добавил ТО для техники ' . DBOnce('name', 'tech_tech', 'id=' . $n['id']) . '<hr>';
+                    }
 				} else {
 					echo 'Но не добавляю :-(';
 				}
