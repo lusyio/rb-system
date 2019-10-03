@@ -1,13 +1,13 @@
 <?php
-include '../../../bdcon.php';
+//include '../../../bdcon.php';
 global $pdo;
 global $pdoves;
 global $now;
 global $yesterday;
 
 // заготовки
-$now = '2019-08-27';
-$yesterday = '2019-08-26';
+//$now = '2019-08-27';
+//$yesterday = '2019-08-26';
 $bwnow = 'between "' . $yesterday . ' 20:00:00" and "' . $now . ' 19:59:59"';
 
 // информация по сменам
