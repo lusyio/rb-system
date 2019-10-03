@@ -132,7 +132,7 @@ $reportMech = DBOnce('report', 'tech_report', 'datetime = "' . $now . '"');
 
 
 $toDone = DB('*', 'tech_work', 'status = "done" and datetime ' . $bwnow);
-$toInWork = DB('*', 'tech_work', 'status = "inwork" and datetime ' . $bwnow);
+$toInWork = DB('*', 'tech_work', 'status = "inwork"');
 
 
 if (!empty($reportMech) or !empty($toDone) or !empty($toInWork)) {
@@ -165,7 +165,7 @@ if (!empty($reportMech) or !empty($toDone) or !empty($toInWork)) {
             <div style="vertical-align:top;text-align:left;width:100%;max-width:800px;">
                 <div
                         style="padding: 20px;max-width: 600px;background-color: #ffffff;">
-                    <h2 style="font-size: 20px;font-weight: 900; color:#000000;">Отчет о работе с 11.09 20:00 по 12.09
+                    <h2 style="font-size: 20px;font-weight: 900; color:#000000;">Отчет о работе с <?=$dateNight;?> 20:00 по <?=$dateDay;?>
                         20:00</h2>
 
                     <table border="0" style="margin-top: 30px">
