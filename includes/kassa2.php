@@ -98,7 +98,7 @@ if (isset($_POST["value"])) {
 if (isset($_POST['del_id'])) { //проверяем, есть ли переменная
 
 // datetime и путь
-    $url = '/kassad/';
+    $url = '/kassa2/';
 
     $delid = $_POST['del_id'];
 
