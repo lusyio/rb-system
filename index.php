@@ -21,7 +21,7 @@ document.location.href = "http://rubezh-info.ru/logout.php";
 	if (!empty($_GET['folder'])) {
 	$folder = $_GET['folder']; // принимаем id задачи
 	
-	$folders = array('log', 'report', 'conf', 'vesylive', 'sclad', 'gsm', 'kassad', 'kassav','brigada','brigada-report','bankclient','vesy-report','tech-work','tech-mech','tech-tech','reg','tech-report','tech','oil','tech-to','tech-sclad','tech-add');
+	$folders = array('log', 'report', 'conf', 'vesylive', 'sclad', 'gsm', 'kassad', 'kassa2', 'kassav','brigada','brigada-report','bankclient','vesy-report','tech-work','tech-mech','tech-tech','reg','tech-report','tech','oil','tech-to','tech-sclad','tech-add');
 	if (!empty($folder)) {
 		if (in_array($folder, $folders)) {
 			$filename = 'includes/'.$folder.'.php';

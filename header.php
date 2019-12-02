@@ -46,13 +46,13 @@ $(function () {
 			    <?php
 				    
 				    // Админ
-					if ($iduser == 1) { $arr = ['tech-work','tech-add','tech-sclad','groupreport','tech-report','sclad','brigada','brigada-report', 'bankclient', 'vesylive', 'kassad', 'gsm', 'log', 'conf']; }
+					if ($iduser == 1) { $arr = ['tech-work','tech-add','tech-sclad','groupreport','tech-report','sclad','brigada','brigada-report', 'bankclient', 'vesylive', 'kassad', 'kassa2', 'gsm', 'log', 'conf']; }
 					
 					// Ласковский С.В.
 					if ($iduser == 2) { $arr = ['bankclient','groupreport', 'tech-work', 'sclad', 'vesylive', 'log']; }
 					
 					// Евдокимов
-					if ($iduser == 4) { $arr = ['groupreport', 'gsm', 'kassad', 'sclad']; }
+					if ($iduser == 4) { $arr = ['groupreport', 'gsm', 'kassad', 'kassa2', 'sclad']; }
 					
 					// Чернюк
 					if ($iduser == 5) { $arr = ['sclad']; }
@@ -104,6 +104,7 @@ $(function () {
 						if ($elem == 'gsm') { $name = 'ГСМ'; $icon = 'fas fa-plus';}
 						if ($elem == 'tech-add') { $name = 'Учет запчастей'; $icon = 'fas fa-plus';}
 						if ($elem == 'kassad' or $elem == 'kassav') { $name = 'Касса'; $icon = 'fas fa-plus';}
+                        if ($elem == 'kassa2') { $name = 'Касса 2'; $icon = 'fas fa-plus';}
 						if ($elem == 'reg') { $name = 'Учет'; $icon = 'fas fa-plus';}
 						if ($elem == 'brigada') { $name = 'Добавить смены'; $icon = 'fas fa-plus';}
 						if ($elem == 'bankclient') { $name = 'Банк-клиент'; $icon = 'fas fa-money-check-alt';}
