@@ -23,6 +23,7 @@
 						echo '
 						<option value="smen">Смены</option>
 						<option value="kassad">Касса (Евдокимов)</option>
+						<option value="kassa2">Касса 2 (Евдокимов)</option>
 						<option value="kassav">Касса (Влада)</option>
 						<option value="real">Отгрузки</option>
 						<option value="gsm">ГСМ</option>
@@ -40,6 +41,7 @@
 						<option value="smen">Смены</option>
 						<option value="mech">Механики</option>
 						<option value="kassad">Касса (Евдокимов)</option>
+						<option value="kassa2">Касса 2 (Евдокимов)</option>
 						<option value="kassav">Касса (Влада)</option>
 						<option value="real">Отгрузки</option>
 						<option value="gsm">ГСМ</option>
@@ -55,6 +57,7 @@
 						echo '
 						<option value="eko">Эко</option>
 						<option value="kassad">Касса (Евдокимов)</option>
+						<option value="kassa2">Касса 2 (Евдокимов)</option>
 						<option value="kassav">Касса (Влада)</option>
 						';
 						
