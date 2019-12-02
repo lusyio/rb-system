@@ -161,7 +161,7 @@ if (isset($_POST['del_id'])) { //проверяем, есть ли переме�
             </thead>
             <tbody>
             <?php
-            $sqlkassa = "SELECT id, type, value, what, date FROM ".$kassa." ORDER BY date DESC LIMIT 50";
+            $sqlkassa = "SELECT id, type, value, what, date FROM ".$kassa." WHERE id != 1 ORDER BY date DESC LIMIT 50";
             $tablekass = $pdo->prepare($sqlkassa);
             $tablekass->execute();
             $tablekass = $tablekass->fetchAll(PDO::FETCH_BOTH);
