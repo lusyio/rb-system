@@ -6,7 +6,7 @@
 		<div class="col-sm-6">
 		<div class="form-group">
 	      <label for="date" class="col-form-label"><i class="far fa-calendar-alt mr-2"></i> Дата начала</label>
-	        <input type="date" class="form-control" name="datestart" id="datestart" value="<?php $yestt = Date("Y-m-d",strtotime("-1 day")); echo $yestt;?>">
+	        <input type="date" class="form-control" name="datestart" id="datestart" value="<?=$yesterday;?>">
 	    </div>
 		</div>
 		<div class="col-sm-6">
@@ -40,12 +40,8 @@
 						echo '
 						<option value="smen">Смены</option>
 						<option value="mech">Механики</option>
-						<option value="kassad">Касса (Евдокимов)</option>
-						<option value="kassa2">Касса 2 (Евдокимов)</option>
-						<option value="kassav">Касса (Влада)</option>
 						<option value="real">Отгрузки</option>
 						<option value="gsm">ГСМ</option>
-						<option value="eko">Эко</option>
 						';
 						
 					} else {
