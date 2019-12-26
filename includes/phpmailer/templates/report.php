@@ -141,8 +141,14 @@ if (!empty($reportMech) or !empty($toDone) or !empty($toInWork)) {
 
 ?>
 <div style="display: none;font-size: 1px;color: #333333;line-height: 1px;max-height: 0px;opacity: 0;overflow: hidden">
+    <?php if(!empty($allDay) and !empty($allNight)) :?>
     <?= $textPlanSmall; ?>.<br>Отгрузили <?= $shebenToday; ?>т. щебня
     и <?= $scrapToday; ?>т. СКРАПа.<br>Доход +<?= $revenueAll; ?> руб.<br>Расход -<?= $rateAll; ?> руб.<br>
+    <?php else : ?>
+    Отгрузили <?= $shebenToday; ?>т. щебня
+    и <?= $scrapToday; ?>т. СКРАПа.<br>Доход +<?= $revenueAll; ?> руб.<br>Расход -<?= $rateAll; ?> руб.<br>
+    <?php endif; ?>
+
     <?php if (!empty($toDone)) : ?>
 
         <?php foreach ($toDone as $n) : ?>
@@ -165,8 +171,8 @@ if (!empty($reportMech) or !empty($toDone) or !empty($toInWork)) {
             <div style="vertical-align:top;text-align:left;width:100%;max-width:800px;">
                 <div
                         style="padding: 20px;max-width: 600px;background-color: #ffffff;">
-                    <h2 style="font-size: 20px;font-weight: 900; color:#000000;">Отчет о работе с <?=$dateNight;?> 20:00 по <?=$dateDay;?>
-                        20:00</h2>
+                    <h2 style="font-size: 20px;font-weight: 900; color:#000000;">Отчет о работе <?php if(!empty($allDay) and !empty($allNight)) :?>с <?=$dateNight;?> 20:00 по <?=$dateDay;?>
+                        20:00<?php endif;?></h2>
 
                     <table border="0" style="margin-top: 30px">
                         <tbody>
