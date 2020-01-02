@@ -83,7 +83,11 @@ endforeach;
 
 // виджет план
 $generalPlanPercent = 0;
-$summ = $allNight + $allDay;
+if (!empty($allNight) and !empty($allDay)) {
+    $summ = $allNight + $allDay;
+} else {
+    $summ = 0;
+}
 
 if (!empty($planNight) or !empty($planDay)) {
     $generalPlanPercent = okr(($summ) * 100 / ($planNight + $planDay));
