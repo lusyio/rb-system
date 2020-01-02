@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 include 'bdcon.php';
 
-$emails = ['mr-kelevras@yandex.ru','dimkaFPS@gmail.com','fso20061@yandex.ru22'];
+$emails = ['mr-kelevras@yandex.ru','dimkaFPS@gmail.com','fso20061@yandex.ru'];
 require_once 'includes/phpmailer/RBMailer.php';
 $mail = new \PHPMailer\PHPMailer\RBMailer();
 try {
