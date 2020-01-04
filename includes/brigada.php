@@ -72,11 +72,12 @@ if(empty($idsm)) {
 	    <div class="form-group">
 	      <label for="staticEmail" class="col-form-label"><i class="far fa-user mr-2"></i> Бригадир</label>
 	        <select name="brigadir" class="form-control">
-				<option value="Рыкин">Рыкин</option>
+                <option value="Туманов">Туманов</option>
 				<option value="Вилков">Вилков</option>
 				<option value="Мартынов">Мартынов</option>
 				<option value="Венников">Венников</option>
 				<option value="Есин">Есин</option>
+                <option value="Рыкин">Рыкин</option>
 			</select>
 	    </div>
 	    <button type="submit" name="Submit" class="btn btn-primary mt-3 mb-3">Добавить смену <i class="fas fa-plus ml-2"></i></button>
