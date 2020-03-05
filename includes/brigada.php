@@ -74,7 +74,7 @@ if(empty($idsm)) {
 	        <select name="brigadir" class="form-control">
                 <option value="Туманов">Туманов</option>
 				<option value="Вилков">Вилков</option>
-				<option value="Мартынов">Мартынов</option>
+				<option value="Мартынов">Аксенов</option>
 				<option value="Венников">Венников</option>
 				<option value="Есин">Есин</option>
                 <option value="Рыкин">Рыкин</option>
