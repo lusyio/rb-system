@@ -23,7 +23,7 @@ $datestart = DBOnce('datestart','brigada','id='.$idsmena1);
 
 $razn = date('d', strtotime($datestart)) - date('d', strtotime($now));
 echo $idsmena1 . ':' . $brigadir1 . ' - ' . $daynight1 . '<br>' . $idsmena2 . ':' . $brigadir2 . ' - ' . $daynight2 . '<br>' . $idsmena3 . ':' . $brigadir1 . ' - ' . $daynight3 . '<br>' . $datestart;
-if ($brigadir1 =='Рыкин' and $daynight1 == 'day' and $brigadir2 == 'Мартынов' and $daynight2=='night' and $brigadir3=='Вилков' and $daynight3=='day' and $razn == 0) {
+if ($brigadir1 =='Рыкин' and $daynight1 == 'day' and $brigadir2 == 'Аксенов' and $daynight2=='night' and $brigadir3=='Вилков' and $daynight3=='day' and $razn == 0) {
 for ($i = 1; $i <= 12; $i++) 
 { 
   	if ($i == 1) {
@@ -71,7 +71,7 @@ for ($i = 1; $i <= 12; $i++)
 	  	$dataend = $dateend;
 	  	$timeend = '18:59:59';
 	  	$daynight = 'day';
-	  	$brigadir = 'Мартынов';
+	  	$brigadir = 'Аксенов';
 	  	$sql = $pdo->prepare("INSERT INTO `brigada` SET `datestart` = :datestart, `timestart` = :timestart, `dateend` = :dateend, `timeend` = :timeend, `daynight` = :daynight, `brigadir` = :brigadir, `report` = 'no'");
 	  	$sql->execute(array('datestart' => $datestart, 'timestart' => $timestart, 'dateend' => $dateend, 'timeend' => $timeend, 'daynight' => $daynight, 'brigadir' => $brigadir));
   	}
@@ -95,7 +95,7 @@ for ($i = 1; $i <= 12; $i++)
 	  	$dataend = $dateend;
 	  	$timeend = '18:59:59';
 	  	$daynight = 'day';
-	  	$brigadir = 'Мартынов';
+	  	$brigadir = 'Аксенов';
 	  	$sql = $pdo->prepare("INSERT INTO `brigada` SET `datestart` = :datestart, `timestart` = :timestart, `dateend` = :dateend, `timeend` = :timeend, `daynight` = :daynight, `brigadir` = :brigadir, `report` = 'no'");
 	  	$sql->execute(array('datestart' => $datestart, 'timestart' => $timestart, 'dateend' => $dateend, 'timeend' => $timeend, 'daynight' => $daynight, 'brigadir' => $brigadir));
   	}
@@ -133,7 +133,7 @@ for ($i = 1; $i <= 12; $i++)
 	  	$dataend = $dateend;
 	  	$timeend = '06:59:59';
 	  	$daynight = 'night';
-	  	$brigadir = 'Мартынов';
+	  	$brigadir = 'Аксенов';
 	  	$sql = $pdo->prepare("INSERT INTO `brigada` SET `datestart` = :datestart, `timestart` = :timestart, `dateend` = :dateend, `timeend` = :timeend, `daynight` = :daynight, `brigadir` = :brigadir, `report` = 'no'");
 	  	$sql->execute(array('datestart' => $datestart, 'timestart' => $timestart, 'dateend' => $dateend, 'timeend' => $timeend, 'daynight' => $daynight, 'brigadir' => $brigadir));
   	}
@@ -157,7 +157,7 @@ for ($i = 1; $i <= 12; $i++)
 	  	$dataend = $dateend;
 	  	$timeend = '06:59:59';
 	  	$daynight = 'night';
-	  	$brigadir = 'Мартынов';
+	  	$brigadir = 'Аксенов';
 	  	$sql = $pdo->prepare("INSERT INTO `brigada` SET `datestart` = :datestart, `timestart` = :timestart, `dateend` = :dateend, `timeend` = :timeend, `daynight` = :daynight, `brigadir` = :brigadir, `report` = 'no'");
 	  	$sql->execute(array('datestart' => $datestart, 'timestart' => $timestart, 'dateend' => $dateend, 'timeend' => $timeend, 'daynight' => $daynight, 'brigadir' => $brigadir));
   	}
