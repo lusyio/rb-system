@@ -298,9 +298,14 @@
 		
 		if ($tech == 41 or $tech == 42 ) {
 			$interval = 500;
-		} 
+		}
 
-		if ($tech == 41) {
+        if ($tech == 62 ) {
+            $interval = 250;
+        }
+
+
+        if ($tech == 41) {
 			$otschet = 8700;
 		}	
 		if ($tech == 42) {
