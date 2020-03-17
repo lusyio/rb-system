@@ -845,10 +845,7 @@
   border-color: #c6ff00 !important;
 }
 .c100.dark > span {
-  color: #ffffff;
-}
-.c100.dark:after {
-  background-color: #2e3a5a;
+  color: #000000;
 }
 .c100.dark:hover > span {
   color: #c6ff00;

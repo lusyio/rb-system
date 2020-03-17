@@ -1,12 +1,42 @@
 /*= Основные
 --------------------------------------------------------*/
 body {
+    font-family: 'Ubuntu', sans-serif !important;
     background: whitesmoke;
     -webkit-text-size-adjust: 100%;
     padding-bottom: 150px;
     overflow-x: hidden;
 }
 
+.btn {
+    font-weight: 500;
+    padding: .575rem 3.675rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .35rem;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0064f4;
+    border: none;
+    transition: 0.3s all;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #0659d2;
+    border: none;
+    transition: 0.3s all;
+}
+
+.input-group-prepend span {
+    width: 90px;
+}
+
+#loginPage .info-block {
+    max-width: 380px;
+    margin: auto;
+}
 #tech .card:hover {
     transition: 0.3s all;
     box-shadow: rgba(13, 28, 60, 0.16) 0px 4px 12px 1px;
@@ -16,6 +46,11 @@ body {
     box-shadow: rgba(197, 197, 201, 0.15) 0px 14px 15px 2px;
     border: none !important;
     border-radius: 7px;
+}
+
+.card-header {
+    background: none;
+    padding: 1.75rem 1.25rem;
 }
 
 .active a {
@@ -47,9 +82,6 @@ img {
     max-width: 100%;
 }
 
-.tablesmen {
-    color: white;
-}
 
 .tablesmen td {
     border-top: 1px solid #252c4a;
@@ -224,12 +256,11 @@ img {
 }
 
 .newmain {
-    background: linear-gradient(-8deg, #252e48, #3e496c);
+    background: white;
     box-shadow: 0 0 42px rgba(0, 0, 0, 0.06);
     -webkit-box-shadow: 0 0 42px rgba(0, 0, 0, 0.06);
     border-radius: 8px;
     -webkit-border-radius: 8px;
-    color: white;
 }
 
 .newmaintop {
@@ -976,9 +1007,6 @@ collapse {
     display: none;
 }
 
-.today table {
-    color: white !important;
-}
 
 .card-footer {
     background-color: rgba(0, 0, 0, .10);

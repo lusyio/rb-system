@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/style.css?ver=26">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&display=swap&subset=cyrillic" rel="stylesheet">
 <script src="/js/bootstrap.min.js"></script> <!-- htt p:/ /netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js -->
 <script src="/js/custom.js?ver=1"></script>
 <script src='/js/sweetalert2.all.js'></script>
