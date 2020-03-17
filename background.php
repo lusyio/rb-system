@@ -295,6 +295,7 @@
 		
 		$interval = 500;
 		$otschet = 0;
+		$predel = 400;
 		
 		if ($tech == 41 or $tech == 42 ) {
 			$interval = 500;
@@ -302,6 +303,7 @@
 
         if ($tech == 62 ) {
             $interval = 250;
+            $predel = 150;
         }
 
 
@@ -316,7 +318,6 @@
 		}
 		
 		$new = (okr(($mch - $otschet) / $interval)*$interval) - ($mch - $otschet);
-		
 		if (!empty($mch2)) {
 			$razn = $mch - $mch2;
 		} else {
@@ -330,7 +331,7 @@
 			
 			if(empty($to)) {
 				echo 'Хочу добавить ТО ';
-				if ($razn == 1 or $razn >= 400) {
+				if ($razn == 1 or $razn >= $predel) {
 
 				    if ($n['id']  != '55') {
                         $sql = $pdo->prepare("INSERT INTO `tech_work` SET `tech` = :tech, `status` = 'inwork', `motchas` = :motchas, `datetime` = :datetime");

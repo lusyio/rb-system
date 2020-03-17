@@ -59,7 +59,7 @@ if (isset($_POST['delto'])) { //проверяем, есть ли перемен
 				<div class="col-sm-9">
 					
 					<select name="to" id="to" class="form-control mb-1">
-						
+                        <option value="250">ТО 250</option>
 						<option value="500">ТО 500</option>
 						<option value="1000">ТО 1000</option>
 						<option value="2000">ТО 2000</option>
