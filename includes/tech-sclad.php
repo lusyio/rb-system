@@ -91,7 +91,7 @@ $tech = DB('*','tech_tech','');
 <div class="card mt-3">
 	<div class="card-body">
 <p><input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Введите название запчасти..."></p>
-        <div class="mb-3">
+        <div class="mb-3 scladzap">
             <?php foreach ($tech as $techUnit): ?>
             <a href="#tech<?= $techUnit['id'] ?>" class="mr-1 btn"><?= $techUnit['name'] ?></a>
             <?php endforeach; ?>

@@ -41,7 +41,7 @@ body {
     transition: 0.3s all;
     box-shadow: rgba(13, 28, 60, 0.16) 0px 4px 12px 1px;
 }
-.addtech {
+.addtech, .scladzap a {
     padding: .375rem .75rem;
 }
 .card {
