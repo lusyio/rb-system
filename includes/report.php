@@ -128,6 +128,7 @@
 					if($iduser == "25") {
 						echo '
 						<option value="mech">Механики</option>
+						<option value="gsm">ГСМ</option>
 						';
 						
 					} else {
