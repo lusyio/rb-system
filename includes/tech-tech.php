@@ -46,7 +46,7 @@ if (isset($_POST['delmot'])) { //проверяем, есть ли переме�
 </div>
 
 <div class="d-none mt-2">
-	<button class="btn btn-light bg-white border mr-2"><i class="fas fa-tachometer-alt mr-3"></i>Внести показания топлива</button>
+	<button class="btn btn-light bg-white border mr-2"><i class="fas fa-tachometer-alt mr-3"></i>Показания топлива</button>
 	<button class="btn btn-light bg-white border mr-2"><i class="fas fa-oil-can mr-3"></i>Учет масла</button>
 	<button class="btn btn-light bg-white border"><i class="fas fa-clone mr-3"></i>Учет фильтров</button>
 </div>
