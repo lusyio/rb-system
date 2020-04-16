@@ -157,7 +157,7 @@ $updatework->execute();
 <div id="tech">
     <div class="mt-2" id="techButtonBlock">
         <button class="btn btn-light bg-white border mr-2" data-toggle="collapse" data-target="#addToplivo"
-                aria-expanded="false" aria-controls="addToplivo"><i class="fas fa-tachometer-alt mr-3"></i>Показания топлива
+                aria-expanded="false" aria-controls="addToplivo"><i class="fas fa-tachometer-alt mr-3"></i>Топливо
         </button>
         <a href="/tech-sclad/" class="btn btn-light bg-white border mr-2"><i class="fas fa-tools mr-3"></i>Склад
             запчастей</a>
