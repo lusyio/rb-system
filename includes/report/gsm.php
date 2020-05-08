@@ -11,7 +11,7 @@
 		$sql->execute();
 		$sql = $sql->fetchAll(PDO::FETCH_BOTH);
 		foreach ($sql as $result) {
-			echo '<div class="float-left gsminfo"><p><strong>'.$result['tech'].'</strong></p><p>'.$result['SUM(toplivo)'].' л.</p></div>';
+			echo '<div class="float-left gsminfo gsm-filter btn btn-outline-primary"  data-filter-tech="'.$result['tech'].'"><p><strong>'.$result['tech'].'</strong></p><p>'.$result['SUM(toplivo)'].' л.</p></div>';
 		}
 		
 echo '<div class="clear"></div><table class="table table-hover mt-3">
@@ -29,7 +29,7 @@ echo '<div class="clear"></div><table class="table table-hover mt-3">
 				$sql = $sql->fetchAll(PDO::FETCH_BOTH);
 				foreach ($sql as $result) {
 				    $newDate2 = date("d.m", strtotime($result['date']));
-					echo '<tr><td>'.$result['tech'].'</td><td>'.$newDate2.'</td><td>'.$result['toplivo'].' л.</td></tr>';
+					echo '<tr class="report-entity" data-tech="'.$result['tech'].'"><td>'.$result['tech'].'</td><td>'.$newDate2.'</td><td>'.$result['toplivo'].' л.</td></tr>';
 			        }
 			   echo '
 			</tbody>

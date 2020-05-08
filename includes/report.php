@@ -161,6 +161,28 @@ $(document).ready(function() {
 		}
 		return false;
     });
+    $('body').on('click', '.gsm-filter', function () {
+        $('.gsm-filter').removeClass('btn-primary');
+        $('.gsm-filter').addClass('btn-outline-primary');
+        if ($(this).hasClass('active-filter')) {
+            $(this).removeClass('active-filter');
+            $('.report-entity').show()
+        } else {
+            var techName = $(this).data('filter-tech');
+            $('.gsm-filter').removeClass('active-filter');
+            $(this).removeClass('btn-outline-primary');
+            $(this).addClass('btn-primary');
+            $(this).addClass('active-filter');
+            $('.report-entity').each(function (i, el) {
+                console.log(el);
+                if ($(el).data('tech') == techName) {
+                    $(el).show();
+                } else {
+                    $(el).hide();
+                }
+            })
+        }
+    })
 });
 </script>
 
