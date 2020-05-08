@@ -55,6 +55,7 @@
 					// Евдокимов
 					if($iduser == "4") {
 						echo '
+						<option value="gsm">ГСМ</option>
 						<option value="eko">Эко</option>
 						<option value="kassad">Касса (Евдокимов)</option>
 						<option value="kassa2">Касса 2 (Евдокимов)</option>
