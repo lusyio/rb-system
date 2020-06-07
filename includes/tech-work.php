@@ -345,7 +345,7 @@ if (!empty($tech)) { ?>
                 if ($new >= 31 and $new <= 100) {
                     $new = '<span class="text-warning font-weight-bold">Скоро ТО ' . $typeTO . '</span>';
                     $todone = '<button class="btn btn-secondary btn-sm" disabled>Подготовка</button>';
-                } else if ($new <= 30) {
+                } else if ($new <= 30 or $new > 100) {
                     $new = '<span class="text-danger font-weight-bold">ТО ' . $typeTO . '</span>';
                     $todone = '<form method="post" class="mb-0"><input class="hidden" name="work" value="' . DBOnce('id', 'tech_work', 'tech=' . $n['id'] . ' order by datetime DESC') . '"><button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-check mr-2"></i>Завершить ТО</button></form>';
                 }
