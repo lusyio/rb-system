@@ -12,7 +12,14 @@ $workDays = DBOnce('COUNT(*)','tech_norm','tech='.$tech.' AND datetime >= "' . $
 $oilCount = DBOnce("SUM(toplivo)",
     "gsm",
     "tech = '" . $techName . "' and date >= '" . $startTime . "'");
-$avgCount = round($oilCount / $workDays, 1);
+if (!$oilCount) {
+    $oilCount = 0;
+}
+if ($workDays == 0) {
+    $avgCount = 0;
+} else {
+    $avgCount = round($oilCount / $workDays, 1);
+}
 function getNumeral($number, $n1, $n2, $n5) {
     if ($number % 100 > 10 && $number % 100 < 15) {
         return $n5;
