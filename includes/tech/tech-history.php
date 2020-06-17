@@ -32,10 +32,17 @@ function getNumeral($number, $n1, $n2, $n5) {
     }
 }
 ?>
-    <p class="tooltip2" style="margin-bottom: 8px">
-        Среднесуточный расход - <strong><?= $avgCount ?> л.</strong>
-        <span class="tooltiptext">С <?= $startTimeDisplay ?> по <?= $endTimeDisplay ?> было заправлено <?= $oilCount ?> <?= getNumeral($oilCount, 'литр', 'литра', 'литров')?>. Техника работала <?= $workDays ?> <?= getNumeral($workDays, 'день', 'дня', 'дней')?>. <?= $oilCount ?>/<?= $workDays ?>=<?= $avgCount ?></span>
-    </p>
+    <?php if ($avgCount == 0): ?>
+        <p class="tooltip2" style="margin-bottom: 8px">
+            Среднесуточный расход - <strong><?= $avgCount ?> л.</strong>
+            <span class="tooltiptext">Нет данных за период с <?= $startTimeDisplay ?> по <?= $endTimeDisplay ?></span>
+        </p>
+    <?php else: ?>
+        <p class="tooltip2" style="margin-bottom: 8px">
+            Среднесуточный расход - <strong><?= $avgCount ?> л.</strong>
+            <span class="tooltiptext">С <?= $startTimeDisplay ?> по <?= $endTimeDisplay ?> было заправлено <?= $oilCount ?> <?= getNumeral($oilCount, 'литр', 'литра', 'литров')?>. Техника работала <?= $workDays ?> <?= getNumeral($workDays, 'день', 'дня', 'дней')?>. <?= $oilCount ?>/<?= $workDays ?>=<?= $avgCount ?></span>
+        </p>
+    <?php endif; ?>
 	<table class="table mb-0">
 			  <thead>
 			    <tr class="table-secondary">
