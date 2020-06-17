@@ -224,10 +224,6 @@ $updatework->execute();
                     </form>
                 </div>
                 <div class="col-sm-6">
-                    <p class="tooltip2" style="margin-bottom: 8px">
-                      Среднесуточный расход - <strong>35 л.</strong>
-                      <span class="tooltiptext">С 1.06 по 30.06 было заправлено 1249 литров. Техника работала 17 дней. 1249/17=35</span>
-                    </p>
                     <div id="history">
                         <?php
                         $normcount = DBOnce('COUNT(*) as count', 'tech_norm', 'tech=41');
@@ -235,7 +231,31 @@ $updatework->execute();
                             echo '<hr><p class="text-center mt-5 mb-5">Данных по данной технике нет</p>';
                         } else {
                             $norm = DB('*', 'tech_norm', 'tech=41 order by datetime DESC limit 5');
+                            $techName = DBOnce('name', 'tech_tech', 'id=41');
+                            $startTime = date('Y-m-d H:i:s',strtotime('-30 days midnight'));
+                            $startTimeDisplay = date('d.m',strtotime('-30 days midnight'));
+                            $endTimeDisplay = date('d.m');
+                            $workDays = DBOnce('COUNT(*)','tech_norm','tech=41 AND datetime >= "' . $startTime . '"');
+                            $oilCount = DBOnce("SUM(toplivo)",
+                                "gsm",
+                                "tech = '" . $techName . "' and date >= '" . $startTime . "'");
+                            $avgCount = round($oilCount / $workDays, 1);
+                            function getNumeral($number, $n1, $n2, $n5) {
+                                if ($number % 100 > 10 && $number % 100 < 15) {
+                                    return $n5;
+                                } elseif ($number % 10 == 1) {
+                                    return $n1;
+                                } elseif ($number % 10 > 1 && $number % 10 < 5) {
+                                    return $n2;
+                                } else {
+                                    return $n5;
+                                }
+                            }
                             ?>
+                            <p class="tooltip2" style="margin-bottom: 8px">
+                                Среднесуточный расход - <strong><?= $avgCount ?> л.</strong>
+                                <span class="tooltiptext">С <?= $startTimeDisplay ?> по <?= $endTimeDisplay ?> было заправлено <?= $oilCount ?> <?= getNumeral($oilCount, 'литр', 'литра', 'литров')?>. Техника работала <?= $workDays ?> <?= getNumeral($workDays, 'день', 'дня', 'дней')?>. <?= $oilCount ?>/<?= $workDays ?>=<?= $avgCount ?></span>
+                            </p>
                             <table class="table mb-0">
                                 <thead>
                                 <tr class="table-secondary">
