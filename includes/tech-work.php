@@ -224,6 +224,10 @@ $updatework->execute();
                     </form>
                 </div>
                 <div class="col-sm-6">
+                    <p class="tooltip2" style="margin-bottom: 8px">
+                      Среднесуточный расход - <strong>35 л.</strong>
+                      <span class="tooltiptext">С 1.06 по 30.06 было заправлено 1249 литров. Техника работала 17 дней. 1249/17=35</span>
+                    </p>
                     <div id="history">
                         <?php
                         $normcount = DBOnce('COUNT(*) as count', 'tech_norm', 'tech=41');
@@ -660,6 +664,7 @@ if (!empty($tech)) { ?>
                 $("#history").empty().html(data);
             }
         }
+
     });
 </script>
 <script src="/js/tech.js"></script>

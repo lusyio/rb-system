@@ -3,7 +3,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="format-detection" content="telephone=no">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/style.css?ver=29">
+<link rel="stylesheet" href="/css/style.css?ver=30">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&display=swap&subset=cyrillic" rel="stylesheet">
 <script src="/js/bootstrap.min.js"></script> <!-- htt p:/ /netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js -->
@@ -39,61 +39,61 @@ $(function () {
 			  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" style="">
 			    <i class="fas fa-bars"></i>
 			  </button>
-			
+
 			  <div class="navbar-collapse collapse menu" id="navbarColor03" style="">
 			    <ul class="nav flex-column w-100">
 			     <li class="nav-item"> <a class="nav-link" href="/"><i class="fas fa-home"></i> Главная</a></li>
-			     
+
 			    <?php
-				    
+
 				    // Админ
 					if ($iduser == 1) { $arr = ['tech-work','tech-add','tech-sclad','groupreport','tech-report','sclad','brigada','brigada-report', 'bankclient', 'vesylive', 'kassad', 'kassa2', 'gsm', 'log', 'conf']; }
-					
+
 					// Ласковский С.В.
 					if ($iduser == 2) { $arr = ['bankclient','groupreport', 'tech-work', 'sclad', 'vesylive', 'log', 'conf']; }
-					
+
 					// Евдокимов
 					if ($iduser == 4) { $arr = ['groupreport', 'gsm', 'kassad', 'kassa2', 'sclad']; }
-					
+
 					// Чернюк
 					if ($iduser == 5) { $arr = ['sclad']; }
-					
+
 					// Двореченец
 					if ($iduser == 6) { $arr = ['vesylive']; }
-					
+
 					// Соколов
 					if ($iduser == 7) { $arr = []; }
-					
+
 					// Корнеев
 					if ($iduser == 8) { $arr = ['brigada-report','brigada', 'sclad', 'report']; }
-					
+
 					// Бригадиры
 					if ($iduser == 9 or $iduser == 10 or $iduser == 23 or $iduser == 24) { $arr = ['report', 'sclad']; }
-					
+
 					// Вилков
 					if ($iduser == 21) { $arr = ['brigada-report','brigada', 'sclad', 'report']; }
-					
-					// Саида 
+
+					// Саида
 					if ($iduser == 18 or $iduser == 26) { $arr = ['groupreport']; }
-					
+
 					// Канаев
 					if ($iduser == 12) { $arr = []; }
-					
+
 					// Влада
 					if ($iduser == 13) { $arr = ['groupreport','kassav']; }
-					
+
 					// Карпунин
 					if ($iduser == 14) { $arr = ['gsm','groupreport']; }
-					
+
 					// Красовский
 					if ($iduser == 17) { $arr = []; }
-					
+
 					// Филлипович
 					if ($iduser == 20) { $arr = ['groupreport','bankclient', 'vesylive']; }
-					
+
 					// Седышев
 					if ($iduser == 25) { $arr = ['tech-report', 'tech-sclad', 'tech-add', 'tech-work', 'report', 'gsm', 'sclad']; }
-					
+
 					foreach ($arr as $elem) {
 						$html = '';
 						if ($elem == 'log') { $num_log = DBOnce('COUNT(*) as count','log','datetime '.$bwnow); $name = 'Лог <span class="badge badge-secondary float-right" style=" position: relative; top: 2px; ">' . $num_log . '</span>'; $icon = 'far fa-list-alt';}
@@ -111,7 +111,7 @@ $(function () {
 						if ($elem == 'bankclient') { $name = 'Банк-клиент'; $icon = 'fas fa-money-check-alt';}
 						if ($elem == 'brigada-report') {$name = 'Отчет о смене'; $icon = 'fas fa-file-signature';}
 						if ($elem == 'tech-report') {$name = 'Отчет механиков'; $icon = 'fas fa-file-signature';}
-						
+
 						if ($elem == 'tech-sclad') { $name = 'Склад запчастей'; $icon = 'fas fa-tools';}
 						if ($elem == 'tec2h') { $html = '<li class="nav-item position-relative"><a class="nav-link" ><i class="fas fa-wrench"></i> Обслуживание <i class="fas fa-angle-down float-right mt-1"></i></a></li>
 							<ul class="drop">
@@ -132,10 +132,6 @@ $(function () {
 				<li class="nav-item"><a class="nav-link" href="/logout.php"><i class="fas fa-sign-out-alt"></i> Выйти</a></li>
 			    </ul>
 			  </div>
-			</nav>		
+			</nav>
 		</div>
 		<div class="col-lg-10 col-sm-12" id="content">
-			
-
-			
-			
