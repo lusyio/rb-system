@@ -1,6 +1,6 @@
 <div class="info-block">
 	<div class="inside">
- 
+
 	<h4>Общий отчет</h4>
 	<div class="row">
 		<div class="col-sm-6">
@@ -30,7 +30,7 @@
 						<option value="spravka">Справка о взвешивании вагонов</option>
 						<option value="eko">Эко</option>
 						';
-						
+
 					} else {
 					}
 				?>
@@ -47,7 +47,7 @@
 						<option value="gsm">ГСМ</option>
 						<option value="eko">Эко</option>
 						';
-						
+
 					} else {
 					}
 				?>
@@ -61,7 +61,7 @@
 						<option value="kassa2">Касса 2 (Евдокимов)</option>
 						<option value="kassav">Касса (Влада)</option>
 						';
-						
+
 					} else {
 					}
 				?>
@@ -71,7 +71,7 @@
 						echo '
 						<option value="smen">Смены</option>
 						';
-						
+
 					} else {
 					}
 				?>
@@ -81,7 +81,7 @@
 						echo '
 						<option value="real">Отгрузки</option>
 						';
-						
+
 					} else {
 					}
 				?>
@@ -89,13 +89,12 @@
 					// Влада
 					if($iduser == "13") {
 						echo '
-						<option value="kassad">Касса (Евдокимов)</option>
 						<option value="kassav">Касса (Влада)</option>
 						<option value="real">Отгрузки</option>
 						<option value="spravka">Справка о взвешивании вагонов</option>
 						<option value="smen">Смены</option>
 						';
-						
+
 					} else {
 					}
 				?>
@@ -106,7 +105,7 @@
 						<option value="real">Отгрузки</option>
 						<option value="gsm">ГСМ</option>
 						';
-						
+
 					} else {
 					}
 				?>
@@ -120,7 +119,7 @@
 						<option value="kassad">Касса (Евдокимов)</option>
 						<option value="kassav">Касса (Влада)</option>
 						';
-						
+
 					} else {
 					}
 				?>
@@ -131,13 +130,13 @@
 						<option value="mech">Механики</option>
 						<option value="gsm">ГСМ</option>
 						';
-						
+
 					} else {
 					}
 				?>
-	</select>	 
+	</select>
 	    <button type="submit" name="reportdo" id="reportdo" class="btn btn-primary mt-3">Сформировать отчет</button>
- 
+
 	</div>
 </div>
 <div class="position-relative">
@@ -185,4 +184,3 @@ $(document).ready(function() {
     })
 });
 </script>
-
