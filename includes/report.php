@@ -67,7 +67,7 @@
 				?>
 				<?php
 					// Корнеев
-					if($iduser == 8 or $iduser == 9 or $iduser == 10 or $iduser == 21 or $iduser == 23 or $iduser == 24) {
+					if($iduser == 8 or $iduser == 9 or $iduser == 10 or $iduser == 21 or $iduser == 23 or $iduser == 24 or $iduser == 27) {
 						echo '
 						<option value="smen">Смены</option>
 						';
