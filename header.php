@@ -68,7 +68,7 @@ $(function () {
 					if ($iduser == 8) { $arr = ['brigada-report','brigada', 'sclad', 'report']; }
 
 					// Бригадиры
-					if ($iduser == 9 or $iduser == 10 or $iduser == 23 or $iduser == 24) { $arr = ['report', 'sclad']; }
+					if ($iduser == 9 or $iduser == 10 or $iduser == 23 or $iduser == 24 or $iduser == 27) { $arr = ['report', 'sclad']; }
 
 					// Вилков
 					if ($iduser == 21) { $arr = ['brigada-report','brigada', 'sclad', 'report']; }
