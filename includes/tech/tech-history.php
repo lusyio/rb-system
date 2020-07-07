@@ -18,7 +18,8 @@ if (!$oilCount) {
 if ($workDays == 0) {
     $avgCount = 0;
 } else {
-    $avgCount = round($oilCount / $workDays, 1);
+	$avgCount = round($oilCount / $workDays, 1);
+	$avgCount = $avgCount * 0.9;
 }
 function getNumeral($number, $n1, $n2, $n5) {
     if ($number % 100 > 10 && $number % 100 < 15) {
@@ -40,7 +41,7 @@ function getNumeral($number, $n1, $n2, $n5) {
     <?php else: ?>
         <p class="tooltip2" style="margin-bottom: 8px">
             Среднесуточный расход - <strong><?= $avgCount ?> л.</strong>
-            <span class="tooltiptext">С <?= $startTimeDisplay ?> по <?= $endTimeDisplay ?> было заправлено <?= $oilCount ?> <?= getNumeral($oilCount, 'литр', 'литра', 'литров')?>. Техника работала <?= $workDays ?> <?= getNumeral($workDays, 'день', 'дня', 'дней')?>. <?= $oilCount ?>/<?= $workDays ?>=<?= $avgCount ?></span>
+            <span class="tooltiptext">С <?= $startTimeDisplay ?> по <?= $endTimeDisplay ?> было заправлено <?= $oilCount ?> <?= getNumeral($oilCount, 'литр', 'литра', 'литров')?>. Техника работала <?= $workDays ?> <?= getNumeral($workDays, 'день', 'дня', 'дней')?>. <?= $oilCount ?>/<?= $workDays ?>-10% погрешности=<?= $avgCount ?></span>
         </p>
     <?php endif; ?>
 	<table class="table mb-0">
