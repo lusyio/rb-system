@@ -232,8 +232,8 @@ $updatework->execute();
                         } else {
                             $norm = DB('*', 'tech_norm', 'tech=40 order by datetime DESC limit 5');
                             $techName = DBOnce('name', 'tech_tech', 'id=40');
-                            $startTime = date('Y-m-d H:i:s',strtotime('-30 days midnight'));
-                            $startTimeDisplay = date('d.m',strtotime('-30 days midnight'));
+                            $startTime = date('Y-m-d H:i:s',strtotime('-90 days midnight'));
+                            $startTimeDisplay = date('d.m',strtotime('-90 days midnight'));
                             $endTimeDisplay = date('d.m');
                             $workDays = DBOnce('COUNT(*)','tech_norm','tech=40 AND datetime >= "' . $startTime . '"');
                             $oilCount = DBOnce("SUM(toplivo)",
