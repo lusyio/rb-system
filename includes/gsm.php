@@ -217,7 +217,7 @@ if (isset($_POST['del_id'])) { //проверяем, есть ли переме�
 		  	</thead>
 		  	<tbody>
 		<?php
-			$sql2 = "SELECT id, tech, date, toplivo  FROM gsm WHERE id > 2 ORDER BY date DESC LIMIT 150";
+			$sql2 = "SELECT id, tech, date, toplivo  FROM gsm WHERE id > 2 ORDER BY id DESC LIMIT 150";
 			$tech2 = $pdo->prepare($sql2);
 			$tech2->execute();
 			$techs2 = $tech2->fetchAll(PDO::FETCH_BOTH);
