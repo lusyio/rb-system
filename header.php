@@ -82,8 +82,8 @@ $(function () {
 					// Влада
 					if ($iduser == 13) { $arr = ['groupreport','kassav']; }
 
-					// Карпунин
-					if ($iduser == 14) { $arr = ['gsm','groupreport']; }
+					// Егор
+					if ($iduser == 28) { $arr = ['gsm','report']; }
 
 					// Красовский
 					if ($iduser == 17) { $arr = []; }

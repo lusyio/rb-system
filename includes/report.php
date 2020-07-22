@@ -99,10 +99,9 @@
 					}
 				?>
 				<?php
-					// Карпунин
-					if($iduser == "14") {
+					// Егор
+					if($iduser == "28") {
 						echo '
-						<option value="real">Отгрузки</option>
 						<option value="gsm">ГСМ</option>
 						';
 

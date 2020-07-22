@@ -71,8 +71,8 @@ document.location.href = "http://rubezh-info.ru/logout.php";
 	// Влада
 	if ($iduser == 13) { $arr = ['widj-otgryz','widg-poboch']; }
 
-	// Карпунин
-	if ($iduser == 14) { $arr = ['widj-otgryz','widg-poboch','widg-gsm']; }
+	// Егор
+	if ($iduser == 28) { $arr = ['widg-gsm']; }
 
 	// Красовский
 	if ($iduser == 17) { $arr = ['widj-kop']; }
