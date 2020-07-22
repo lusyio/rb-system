@@ -50,7 +50,7 @@ $(function () {
 					if ($iduser == 1) { $arr = ['tech-work','tech-add','tech-sclad','groupreport','tech-report','sclad','brigada','brigada-report', 'bankclient', 'vesylive', 'kassad', 'kassa2', 'gsm', 'log', 'conf']; }
 
 					// Ласковский С.В.
-					if ($iduser == 2) { $arr = ['bankclient','groupreport', 'tech-work', 'sclad', 'vesylive', 'log', 'conf']; }
+					if ($iduser == 2) { $arr = ['bankclient','groupreport', 'kassad', 'kassa2', 'tech-work', 'sclad', 'vesylive', 'log', 'conf']; }
 
 					// Евдокимов
 					if ($iduser == 4) { $arr = ['groupreport', 'gsm', 'kassad', 'kassa2', 'sclad']; }
