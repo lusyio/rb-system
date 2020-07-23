@@ -293,18 +293,18 @@
 
 		$mch2 = DBOnce('motchas','tech_work','tech='.$n['id'].' and status="done" order by datetime DESC');
 
-		$interval = 500;
+		$interval = 250; //500
 		$otschet = 0;
-		$predel = 400;
+		$predel = 150; //400
 
-		if ($tech == 41 or $tech == 42 ) {
-			$interval = 500;
-		}
-
-        if ($tech == 62 ) {
-            $interval = 250;
-            $predel = 150;
-        }
+//		if ($tech == 41 or $tech == 42 ) {
+//			$interval = 500;
+//		}
+//
+//        if ($tech == 62 ) {
+//            $interval = 250;
+//            $predel = 150;
+//        }
 
 
         if ($tech == 41) {
