@@ -105,6 +105,7 @@ $(function () {
 						if ($elem == 'gsm') { $name = 'ГСМ'; $icon = 'fas fa-plus';}
 						if ($elem == 'tech-add') { $name = 'Учет запчастей'; $icon = 'fas fa-plus';}
 						if ($elem == 'kassad' or $elem == 'kassav') { $name = 'Касса'; $icon = 'fas fa-plus';}
+						if ($iduser == 2 and $elem == 'kassav') { $name = 'Касса Влады'; $icon = 'fas fa-plus';}
                         if ($elem == 'kassa2') { $name = 'Касса 2'; $icon = 'fas fa-plus';}
 						if ($elem == 'reg') { $name = 'Учет'; $icon = 'fas fa-plus';}
 						if ($elem == 'brigada') { $name = 'Добавить смены'; $icon = 'fas fa-plus';}
