@@ -136,3 +136,11 @@ $(function () {
 			</nav>
 		</div>
 		<div class="col-lg-10 col-sm-12" id="content">
+
+            <?php
+if($noconnect == 1) : ?>
+            <div class="alert alert-danger mt-2" role="alert">
+                Упс! Нет соединения с базой данных ВесыСофт. К сожалению, система не работает. Скорее всего проблема уже устраняется
+            </div>
+            <?php endif; ?>
+
