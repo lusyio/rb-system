@@ -13,20 +13,31 @@
   <tbody>
 <?php
 // header('Content-type: text/html; charset=utf-8');
-$OstatkiTovarov = simplexml_load_file('work/OUT/OstatkiTovarov.XML'); 
-
- /* Для каждого узла <character>, мы отдельно выведем имя <name>. */
+$OstatkiTovarov = simplexml_load_file('work/OUT/OstatkiTovarov.XML');
 for ($i = 0; $i <= 5; $i++) {
-$sklad2 = $OstatkiTovarov->Sklad[$i];
+$sklad2 = $OstatkiTovarov->Sklad[$i]; ?>
+<div class="d-none">
+    <?php
 $namesklad = $sklad2->Title;
-if ($namesklad == 'Служба Главного Механика' or $namesklad == 'Склад АХО и спецодежды') {
+?>
+</div>
+<?php
+if ($namesklad == 'Служба Главного Механика' or $namesklad == 'Склад АХО и спецодежды' or $namesklad == 'Производственный участок (по переработке)') { ?>
+
+<tr class="table-active">
+    <td>
+        <?=$namesklad?>
+    </td>
+    <td></td>
+</tr>
+<?php
 foreach ($OstatkiTovarov->Sklad[$i]->Tovar as $sklad) {
 	$name = $sklad->Name;
 	$ei = $sklad->Edizm;
 	$kol = $sklad->Kol;
 	echo '<tr><td>'.$name.'</td><td>'.$kol.' '.$ei.'</td></tr>';
-	
-	
+
+
 }
 }
 
@@ -35,7 +46,7 @@ foreach ($OstatkiTovarov->Sklad[$i]->Tovar as $sklad) {
 </table>
 <script>
 function myFunction() {
-  // Declare variables 
+  // Declare variables
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
@@ -52,7 +63,7 @@ function myFunction() {
       } else {
         tr[i].style.display = "none";
       }
-    } 
+    }
   }
 }
 </script>
