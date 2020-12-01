@@ -161,8 +161,8 @@
 	if ($nowtime >=7 and $nowtime <19) {
 		$datasmen = $now;
 		$daynight = 'day';
-		$kof = '1.05';
-		$kolsmen = 2; // без ночных ставь 1
+		$kof = '1.00';
+		$kolsmen = 1; // без ночных ставь 1
 		if ($kolsmen != 1) {
 			$minus = 1;
 		} else {
