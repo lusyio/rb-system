@@ -173,8 +173,8 @@
 		if ($prosplan < 0) {
 			$prosplan = 0;
 		}
-		if ($prosplan > 1220) {
-			$prosplan = 1207;
+		if ($prosplan > 2100) {
+			$prosplan = 2100;
 		}
 		$prosplan2 = number_format($prosplan,0,'',' ');
 		$pobochost = $planpoboch - $zennopobo;
