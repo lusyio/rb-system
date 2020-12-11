@@ -45,6 +45,8 @@ if ($rateAll == 0) {
     $rateImg = 'rate-no';
 }
 
+$allNight = 0;
+
 
 foreach ($nightSmena as $n) :
 
