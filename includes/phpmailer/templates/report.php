@@ -46,6 +46,7 @@ if ($rateAll == 0) {
 }
 
 $allNight = 0;
+$planNight = 0;
 
 
 foreach ($nightSmena as $n) :
