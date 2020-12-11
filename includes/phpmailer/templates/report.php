@@ -90,6 +90,11 @@ if (!empty($allNight) and !empty($allDay)) {
 }
 
 if (!empty($planNight) or !empty($planDay)) {
+
+    if(empty($planNight)) {
+        $planNight = 0;
+    }
+
     $generalPlanPercent = okr(($summ) * 100 / ($planNight + $planDay));
 }
 
