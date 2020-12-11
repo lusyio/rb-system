@@ -16,13 +16,11 @@ $bwnow = 'between "' . $yesterday . ' 20:00:00" and "' . $now . ' 19:59:59"';
 $nightSmenaId = DBOnce('id', 'brigada', 'datestart = "' . $yesterday . '" and timestart = "19:00:00"');
 $daySmenaId = DBOnce('id', 'brigada', 'datestart = "' . $now . '" and timestart = "07:00:00"');
 
-var_dump($daySmenaId);
-
 // получаем по ним данные
 $nightSmena = DB('brigadir, marten, lpk, don, oplmat, prostoy, plansmena, comment', 'brigada', 'id = ' . $nightSmenaId);
 $daySmena = DB('brigadir, marten, lpk, don, oplmat, prostoy, plansmena, comment', 'brigada', 'id = ' . $daySmenaId);
 
-var_dump($daySmena);
+
 // информация по финансам
 
 $revenueEvd = DBOnce('SUM(value)', 'kassa', 'type="Приход" and date ' . $bwnow);
@@ -85,7 +83,7 @@ endforeach;
 
 // виджет план
 $generalPlanPercent = 0;
-if (!empty($allNight) and !empty($allDay)) {
+if (!empty($allNight) or !empty($allDay)) {
     $summ = $allNight + $allDay;
 } else {
     $summ = 0;
