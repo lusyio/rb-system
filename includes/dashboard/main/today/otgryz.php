@@ -1,10 +1,10 @@
 <?php
-$otrgyz = DBOnce2('COUNT(*) as count', 'weighing', '(GRUZ_NAME = "Песок шлаковый 0-5 мм" OR GRUZ_NAME = "Щебень 5-20 мм" OR GRUZ_NAME = "Щебень 0-20 мм." OR GRUZ_NAME = "Щебень 20-40 мм." OR GRUZ_NAME = "Щебень 20-70 мм.") and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE ' . $bwnow);
+$otrgyz = DBOnce2('COUNT(*) as count', 'weighing', '(GRUZ_NAME = "Песок шлаковый 0-5 мм" OR GRUZ_NAME = "Щебень 5-20 мм" OR GRUZ_NAME = "Щебеночно - песчаная смесь С1 фракции 0-70 мм" OR GRUZ_NAME = "Щебень 20-40 мм." OR GRUZ_NAME = "Щебень 20-70 мм.") and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE ' . $bwnow);
 if ($otrgyz == 0) {
     return;
 }
 
-$sql = 'SELECT GRUZ_NAME, FIRMA_POL, SUM(NETTO) AS SUM_NETTO FROM weighing WHERE (GRUZ_NAME = "Песок шлаковый 0-5 мм" OR GRUZ_NAME = "Щебень 5-20 мм" OR GRUZ_NAME = "Щебень 0-20 мм." OR GRUZ_NAME = "Щебень 20-40 мм." OR GRUZ_NAME = "Щебень 20-70 мм.") and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE ' . $bwnow . ' GROUP BY FIRMA_POL, GRUZ_NAME';
+$sql = 'SELECT GRUZ_NAME, FIRMA_POL, SUM(NETTO) AS SUM_NETTO FROM weighing WHERE (GRUZ_NAME = "Песок шлаковый 0-5 мм" OR GRUZ_NAME = "Щебень 5-20 мм" OR GRUZ_NAME = "Щебеночно - песчаная смесь С1 фракции 0-70 мм" OR GRUZ_NAME = "Щебень 20-40 мм." OR GRUZ_NAME = "Щебень 20-70 мм.") and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE ' . $bwnow . ' GROUP BY FIRMA_POL, GRUZ_NAME';
 $sql = $pdoves->prepare($sql);
 $sql->execute();
 $sql = $sql->fetchAll(PDO::FETCH_BOTH);
@@ -13,7 +13,7 @@ $polychNames = [];
 $gruzNames = [
     'Песок шлаковый 0-5 мм',
     'Щебень 5-20 мм',
-    'Щебень 0-20 мм.',
+    'Щебеночно - песчаная смесь С1 фракции 0-70 мм',
     'Щебень 20-40 мм.',
     'Щебень 20-70 мм.',
 ];
@@ -72,8 +72,8 @@ echo '<p>Сегодня мы отгрузили ' . round($allshebtoday / 1000) 
                 if ($gruzName == 'Щебень 5-20 мм') {
                     $displayName = '5-20';
                 }
-                if ($gruzName == 'Щебень 0-20 мм.') {
-                    $displayName = '0-20';
+                if ($gruzName == 'Щебеночно - песчаная смесь С1 фракции 0-70 мм') {
+                    $displayName = '0-70';
                 }
                 if ($gruzName == 'Щебень 20-40 мм.') {
                     $displayName = '20-40';
