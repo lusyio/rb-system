@@ -2,7 +2,7 @@
 	 // Щебень
 	 $sh05sum = (DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Песок шлаковый 0-5 мм" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwmonth))/1000;
 	 $sh520sum = (DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 5-20 мм" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwmonth))/1000;
-	 $sh020sum = (DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 0-20 мм." and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwmonth))/1000;
+	 $sh020sum = (DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебеночно - песчаная смесь С1 фракции 0-70 мм" and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwmonth))/1000;
 	$sh2040sum = (DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 20-40 мм." and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwmonth))/1000;
 	$sh2070sum = (DBOnce2('SUM(NETTO)','weighing','GRUZ_NAME="Щебень 20-70 мм." and TYP_EVENT="Реализация (отгрузка покупателю)" and DATETIME_CREATE '.$bwmonth))/1000;	
 	$allshebsum = $sh05sum + $sh520sum + $sh020sum + $sh2040sum + $sh2070sum;
@@ -42,7 +42,7 @@
 <tbody>
 	<tr><td width="10px"><span id="h1"></span></td><td><strong>Щебень 0-5</strong></td><td><?php echo numb($sh05sum);?> т.</td></tr>
 	<tr><td width="10px"><span id="h1"></span></td><td><strong>Щебень 5-20</strong></td><td><?php echo numb($sh520sum);?> т.</td></tr>
-	<tr><td width="10px"><span id="h1"></span></td><td><strong>Щебень 0-20</strong></td><td><?php echo numb($sh020sum);?> т.</td></tr>
+	<tr><td width="10px"><span id="h1"></span></td><td><strong>Щебень 0-70</strong></td><td><?php echo numb($sh020sum);?> т.</td></tr>
 	<tr><td width="10px"><span id="h2"></span></td><td><strong>Щебень 20-40</strong></td><td><?php echo numb($sh2040sum);?> т.</td></tr>
 	<tr><td width="10px"><span id="h3"></span></td><td><strong>Щебень 20-70</strong></td><td><?php echo numb($sh2070sum);?> т.</td></tr>
 	<?php if ($iduser != 20) { ?>
