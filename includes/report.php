@@ -98,6 +98,18 @@
 					} else {
 					}
 				?>
+                <?php
+                // Крылов
+                if($iduser == "13") {
+                    echo '
+						<option value="real">Отгрузки</option>
+						<option value="spravka">Справка о взвешивании вагонов</option>
+						<option value="smen">Смены</option>
+						';
+
+                } else {
+                }
+                ?>
 				<?php
 					// Егор
 					if($iduser == "28") {
