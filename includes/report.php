@@ -100,7 +100,7 @@
 				?>
                 <?php
                 // Крылов
-                if($iduser == "13") {
+                if($iduser == "29") {
                     echo '
 						<option value="real">Отгрузки</option>
 						<option value="spravka">Справка о взвешивании вагонов</option>
