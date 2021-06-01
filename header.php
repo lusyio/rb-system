@@ -94,6 +94,10 @@ $(function () {
 					// Седышев
 					if ($iduser == 25) { $arr = ['tech-report', 'tech-sclad', 'tech-add', 'tech-work', 'report', 'gsm', 'sclad']; }
 
+					// Крылов Артем
+                    if ($iduser == 29) { $arr = ['groupreport']; }
+
+
 					foreach ($arr as $elem) {
 						$html = '';
 						if ($elem == 'log') { $num_log = DBOnce('COUNT(*) as count','log','datetime '.$bwnow); $name = 'Лог <span class="badge badge-secondary float-right" style=" position: relative; top: 2px; ">' . $num_log . '</span>'; $icon = 'far fa-list-alt';}
